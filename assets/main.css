@@ -1,0 +1,37 @@
+a
+    {
+        color: #14436F !important;
+        text-decoration: none;
+    }
+a:hover
+    {
+        color: #B99557!important;
+        text-decoration: none;
+    }
+
+h5
+    {
+        color: #14436F;
+    }
+ul
+    {
+        list-style-type: none;
+    }
+
+/* bootstrap modifications */
+.form-control:focus
+    {
+        border-color: #B99557;
+        box-shadow: 0 0 0 0.1rem rgba(185, 149, 87, 0.25);
+    }
+.accordion
+    {
+        --bs-accordion-active-bg:none !important;
+        --bs-accordion-btn-focus-box-shadow:none !important;
+    }
+
+
+.accordion-item
+    {
+        border: none !important;
+    }
