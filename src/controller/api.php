@@ -25,8 +25,8 @@ $result=match ($route[2])
             $innerResult=match ($method) 
                 {
                     'GET' => isset($route[3])? Student::getStudent($con, $route[3]):Student::getStudents($con),
-                    'POST' => Student::addStudent($con, $data['nId'], $data['name'], $data['D_O_B'], $data['gender'], $data['religion'], $data['guardianName'], $data['guardianPhoneNo'],$data['grade'], $data['feesPaid'], $data['passed'], $data['classRoomId']),
-                    'PUT' => Student::updateStudent($con,$data['id'], $data['nId'], $data['name'], $data['D_O_B'], $data['gender'], $data['religion'], $data['guardianName'], $data['guardianPhoneNo'],$data['grade'], $data['feesPaid'], $data['passed'], $data['classRoomId']),
+                    'POST' => Student::addStudent($con, $data['nId'], $data['name'], $data['DOB'], $data['gender'], $data['religion'], $data['guardianName'], $data['guardianPhoneNo'],$data['grade'], $data['feesPaid'], $data['passed'], $data['classRoomId']),
+                    'PUT' => Student::updateStudent($con,$data['id'], $data['nId'], $data['name'], $data['DOB'], $data['gender'], $data['religion'], $data['guardianName'], $data['guardianPhoneNo'],$data['grade'], $data['feesPaid'], $data['passed'], $data['classRoomId']),
                     'DELETE' => Student::deleteStudent($con,$route[3]),
                     default => http_response_code(405)
                 },
@@ -35,8 +35,8 @@ $result=match ($route[2])
             $innerResult=match ($method) 
                 {
                     'GET' =>isset($route[3])? Teacher::getTeacher($con, $route[3]):Teacher::getTeachers($con),
-                    'POST' => Teacher::addTeacher($con, $data['nId'], $data['rank'], $data['phoneNo'], $data['name'], $data['D_O_B'], $data['D_O_G'], $data['D_O_E'], $data['periodsExNo'], $data['periodsAcNo'],$data['subjectId']),
-                    'PUT' => Teacher::updateTeacher($con,$data['id'], $data['nId'], $data['rank'], $data['phoneNo'], $data['name'], $data['D_O_B'], $data['D_O_G'], $data['D_O_E'], $data['periodsExNo'], $data['periodsAcNo'],$data['subjectId']),
+                    'POST' => Teacher::addTeacher($con, $data['nId'], $data['rank'], $data['phoneNo'], $data['name'], $data['DOB'], $data['DOG'], $data['DOE'], $data['periodsExNo'], $data['periodsAcNo'],$data['subjectId']),
+                    'PUT' => Teacher::updateTeacher($con,$data['id'], $data['nId'], $data['rank'], $data['phoneNo'], $data['name'], $data['DOB'], $data['DOG'], $data['DOE'], $data['periodsExNo'], $data['periodsAcNo'],$data['subjectId']),
                     'DELETE' => Teacher::deleteTeacher($con,$route[3]),
                     default => http_response_code(405)
               },

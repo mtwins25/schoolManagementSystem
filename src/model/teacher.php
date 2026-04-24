@@ -6,23 +6,23 @@ class Teacher {
         public $rank;
         public $phoneNo;
         public $name;
-        public $D_O_B;
-        public $D_O_G;
-        public $D_O_E;
+        public $DOB;
+        public $DOG;
+        public $DOE;
         public $periodsExNo;
         public $periodsAcNo;
         public $subjectId;
 
-    function __construct($id="", $nId="", $rank="", $phoneNo="", $name="", $D_O_B="", $D_O_G="", $D_O_E="", $periodsExNo="", $periodsAcNo="", $subjectId="") 
+    function __construct($id="", $nId="", $rank="", $phoneNo="", $name="", $DOB="", $DOG="", $DOE="", $periodsExNo="", $periodsAcNo="", $subjectId="") 
         {
             $this->id = $id;
             $this->nId = $nId;
             $this->rank = $rank;
             $this->phoneNo = $phoneNo;
             $this->name = $name;
-            $this->D_O_B = $D_O_B;
-            $this->D_O_G = $D_O_G;
-            $this->D_O_E = $D_O_E;
+            $this->DOB = $DOB;
+            $this->DOG = $DOG;
+            $this->DOE = $DOE;
             $this->periodsExNo = $periodsExNo;
             $this->periodsAcNo = $periodsAcNo;
             $this->subjectId = $subjectId;
@@ -38,21 +38,21 @@ class Teacher {
 
     static function getTeacher($con, $id) 
             {
-                $sql = "SELECT teachers.id as teacherId, teachers.name as teacherName, nId, rank, phoneNo, periodsAcNo, periodsExNo, D.O.E, D.O.G, D.O.B, subjects.id as subjectId, subjects.name as subjectName FROM teachers join subjects on teachers.subjectId = subjects.id WHERE teachers.id = $id";
+                $sql = "SELECT teachers.id as teacherId, teachers.name as teacherName, nId, rank, phoneNo, periodsAcNo, periodsExNo, DOE, DOG, DOB, subjects.id as subjectId, subjects.name as subjectName FROM teachers join subjects on teachers.subjectId = subjects.id WHERE teachers.id = $id";
                 $result = $con->query($sql)->fetch(\PDO::FETCH_ASSOC);
                 
                 return $result;
             }
-    static function addTeacher($con, $nId, $rank, $phoneNo, $name, $D_O_B, $D_O_G, $D_O_E, $periodsExNo, $periodsAcNo,$subjectId) 
+    static function addTeacher($con, $nId, $rank, $phoneNo, $name, $DOB, $DOG, $DOE, $periodsExNo, $periodsAcNo,$subjectId) 
             {
-                $sql = "INSERT INTO teachers(nId, rank, phoneNo, name, D.O.B, D.O.G, D.O.E, periodsExNo, periodsAcNo, subjectId) VALUES ($nId, $rank, $phoneNo, $name, $D_O_B, $D_O_G, $D_O_E, $periodsExNo, $periodsAcNo, $subjectId)";
+                $sql = "INSERT INTO teachers(nId, rank, phoneNo, name, DOB, DOG, DOE, periodsExNo, periodsAcNo, subjectId) VALUES ($nId, $rank, $phoneNo, $name, $DOB, $DOG, $DOE, $periodsExNo, $periodsAcNo, $subjectId)";
                 $result = $con->query($sql);
                 
                 return $result;
             }
-    static function updateTeacher($con, $id, $nId, $rank, $phoneNo, $name, $D_O_B, $D_O_G, $D_O_E, $periodsExNo, $periodsAcNo,$subjectId) 
+    static function updateTeacher($con, $id, $nId, $rank, $phoneNo, $name, $DOB, $DOG, $DOE, $periodsExNo, $periodsAcNo,$subjectId) 
             {
-                $sql = "UPDATE teachers SET nId = $nId, rank = $rank, phoneNo = $phoneNo, name = $name, D.O.B = $D_O_B, D.O.G = $D_O_G, D.O.E = $D_O_E, periodsExNo = $periodsExNo, periodsAcNo = $periodsAcNo, subjectId = $subjectId WHERE id = $id";
+                $sql = "UPDATE teachers SET nId = $nId, rank = $rank, phoneNo = $phoneNo, name = $name, DOB = $DOB, DOG = $DOG, DOE = $DOE, periodsExNo = $periodsExNo, periodsAcNo = $periodsAcNo, subjectId = $subjectId WHERE id = $id";
                 $result = $con->query($sql);
                 
                 return $result;
