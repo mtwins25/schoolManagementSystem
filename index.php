@@ -165,7 +165,7 @@
         <!-- main page content -->
         <div class="row">
             <div class="col">
-                <a href="students/1">click</a>
+           
             </div>
             <div class="col">
               Column
