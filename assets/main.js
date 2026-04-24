@@ -6,8 +6,8 @@ const showStudents = document.querySelector("#showStudents");
 const addStudent = document.querySelector("#addStudent");
 const showSubjects = document.querySelector("#showSubjects");
 const addSubject = document.querySelector("#addSubject");
-const showClasseRooms = document.querySelector("#showClasses");
-const addClassRoom = document.querySelector("#addClass");
+const showClasseRooms = document.querySelector("#showClassRooms");
+const addClassRoom = document.querySelector("#addClassRoom");
 const showBuildings = document.querySelector("#showBuildings");
 const addBuilding = document.querySelector("#addBuilding");
 const mainContent = document.querySelector("#mainContent");
@@ -20,7 +20,7 @@ dashboard.addEventListener("click", async () =>
 // teachers event listeners
 showTeachers.addEventListener("click", async () => 
     {
-        const url = "/teachers";
+        const url = "teachers";
         try {
             const response = await fetch(url);
             if (!response.ok) 
@@ -37,7 +37,7 @@ showTeachers.addEventListener("click", async () =>
 addTeacher.addEventListener("click", async () => 
     {
         let data;
-        const url = "/teachers";
+        const url = "teachers";
         try {
             const response = await fetch(url, 
                 {
@@ -60,7 +60,8 @@ addTeacher.addEventListener("click", async () =>
 // students event listeners
 showStudents.addEventListener("click", async () => 
     {
-        const url = "/students";
+        alert("show students");
+        const url = "students";
         try {
             const response = await fetch(url);
             if (!response.ok) 
@@ -77,7 +78,7 @@ showStudents.addEventListener("click", async () =>
 addStudent.addEventListener("click", async () => 
     {
         let data;
-        const url = "/students";
+        const url = "students";
         try {
             const response = await fetch(url, 
                 {
@@ -100,7 +101,7 @@ addStudent.addEventListener("click", async () =>
 // subjects event listeners
 showSubjects.addEventListener("click", async () => 
     {
-        const url = "/subjects";
+        const url = "subjects";
         try {
             const response = await fetch(url);
             if (!response.ok) 
@@ -114,10 +115,10 @@ showSubjects.addEventListener("click", async () =>
                 console.error(error.message);
             };
     });
-addSubject.addEventListener("click", () => 
+addSubject.addEventListener("click", async () => 
     {
         let data;
-        const url = "/subjects";
+        const url = "subjects";
         try {
             const response = await fetch(url, 
                 {
@@ -137,10 +138,10 @@ addSubject.addEventListener("click", () =>
                 console.error(error.message);
             };
     });
-// classes event listeners
-showClasseRooms.addEventListener("click", () => 
+// classRooms event listeners
+showClassRooms.addEventListener("click", async () => 
     {
-        const url = "/classeRooms";
+        const url = "classRooms";
         try {
             const response = await fetch(url);
             if (!response.ok) 
@@ -154,10 +155,10 @@ showClasseRooms.addEventListener("click", () =>
                 console.error(error.message);
             };
     });
-addClassRoom.addEventListener("click", () => 
+addClassRoom.addEventListener("click", async () => 
     {
         let data;
-        const url = "/classeRooms";
+        const url = "classRooms";
         try {
             const response = await fetch(url, 
                 {
@@ -177,9 +178,9 @@ addClassRoom.addEventListener("click", () =>
             };
     });
 // buildings event listeners
-showBuildings.addEventListener("click", () => 
+showBuildings.addEventListener("click", async () => 
     {
-        const url = "/buildings";
+        const url = "buildings";
         try {
             const response = await fetch(url);
             if (!response.ok) 
@@ -193,10 +194,10 @@ showBuildings.addEventListener("click", () =>
                 console.error(error.message);
             };
     });
-addBuilding.addEventListener("click", () => 
+addBuilding.addEventListener("click", async () => 
     {
         let data;
-        const url = "/buildings";
+        const url = "buildings";
         try {
             const response = await fetch(url, 
                 {

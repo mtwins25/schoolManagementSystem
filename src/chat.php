@@ -1,5 +1,5 @@
 <?php
-namespace MyApp;
+namespace MyApp\model;
 use Ratchet\MessageComponentInterface;
 use Ratchet\ConnectionInterface;
 
