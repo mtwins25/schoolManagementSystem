@@ -1,5 +1,6 @@
 <?php
-require '../model/databaseConnection.php';
+require 'C:\xampp\htdocs\schoolManagementSystem\vendor\autoload.php';
+require 'C:\xampp\htdocs\schoolManagementSystem\src\model\databaseConnection.php';
 use MyApp\model\Building;
 use MyApp\model\ClassRoom;
 use MyApp\model\Student;
@@ -12,12 +13,12 @@ if($method == 'POST' || $method == 'PUT')
     {
         $data = json_decode(file_get_contents('php://input'), true);
     }
-{
-    http_response_code(200);
-    exit();
-}
+
 // var_dump($route);
 // echo "method is : $method and route is : $route";
+// $x="buildings";
+// $method="GET";
+// $route=null;
 $result=match ($route[2]) 
     {
         'students' =>

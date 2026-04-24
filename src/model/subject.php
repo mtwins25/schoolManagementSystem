@@ -1,11 +1,8 @@
 <?php
 namespace MyApp\model;
-class subject {
+class Subject {
     	public $id;
-
         public $name;
-
-
 
     function __construct($id="", $name="",) 
         {

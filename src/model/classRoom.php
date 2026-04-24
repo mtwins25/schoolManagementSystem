@@ -1,6 +1,6 @@
 <?php
 namespace MyApp\model;
-class classRoom {
+class ClassRoom {
     	public $id;
         public $buildingId;
         public $name;

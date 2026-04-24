@@ -1,6 +1,6 @@
 <?php
 namespace MyApp\model;
-class teacher {
+class Teacher {
     	public $id;
         public $nId;
         public $rank;
@@ -12,8 +12,6 @@ class teacher {
         public $periodsExNo;
         public $periodsAcNo;
         public $subjectId;
-
-
 
     function __construct($id="", $nId="", $rank="", $phoneNo="", $name="", $D_O_B="", $D_O_G="", $D_O_E="", $periodsExNo="", $periodsAcNo="", $subjectId="") 
         {
