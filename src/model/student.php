@@ -33,7 +33,7 @@ class Student {
         }
     static function getStudents($con) 
             {
-                $sql = "SELECT students.id as studentId,nId, students.name as studentName, grade, classRooms.id as classRoomId, classRooms.name as classRoomName FROM students join classRooms on students.classRoomId = classRooms.id";
+                $sql = "SELECT students.id as studentId,nId, students.name as studentName, students.grade, classRooms.id as classRoomId, classRooms.name as classRoomName FROM students join classRooms on students.classRoomId = classRooms.id";
                 $result = $con->query($sql)->fetchAll(\PDO::FETCH_ASSOC);
                 
                 return $result;

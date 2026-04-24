@@ -1,6 +1,6 @@
 <?php
-require 'C:\xampp\htdocs\schoolManagementSystem\vendor\autoload.php';
-require 'C:\xampp\htdocs\schoolManagementSystem\src\model\databaseConnection.php';
+require  __DIR__.'/../../vendor/autoload.php';
+require  __DIR__.'/../model/databaseConnection.php';
 use MyApp\model\Building;
 use MyApp\model\ClassRoom;
 use MyApp\model\Student;

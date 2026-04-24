@@ -60,7 +60,6 @@ addTeacher.addEventListener("click", async () =>
 // students event listeners
 showStudents.addEventListener("click", async () => 
     {
-        alert("show students");
         const url = "students";
         try {
             const response = await fetch(url);
