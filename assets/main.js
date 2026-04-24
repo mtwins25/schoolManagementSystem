@@ -69,7 +69,8 @@ showStudents.addEventListener("click", async () =>
                 }
             
             const result = await response.json();
-            console.log(result);
+            mainContent.innerHTML = result[0].name;
+            console.log(result[0].name);
             } catch (error) {
                 console.error(error.message);
             };
