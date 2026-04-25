@@ -69,8 +69,13 @@ showStudents.addEventListener("click", async () =>
                 }
             
             const result = await response.json();
-            mainContent.innerHTML = result[0].name;
-            console.log(result[0].name);
+            display='<table class="table table-striped table-hover">\n<tr><th>م</th><th>الرقم القومي</th><th>الاسم</th><th>الصف</th><th>الفصل</th><th>العمليات</th></tr>';
+            for (let i = 0; i < result.length; i++)
+                 {
+                    display+=`<tr><td>${i+1}</td><td>${result[i].nId}</td><td>${result[i].studentName}</td><td>${result[i].grade}</td><td>,<a href="#" data-classRoomId="${result[i].classRoomId}">${result[i].classRoomName}</a></td><td><a class="detailsLink ms-3" href="#" data-studentId="${result[i].studentId}"> <i class="bi bi-person-lines-fill"></i></a><a class="editingLink ms-3" href="#" data-studentId="${result[i].studentId}"><i class="bi bi-pen-fill"></i></a><a class="deleteLink ms-3" href="#" data-studentId="${result[i].studentId}"> <i class="bi bi-trash-fill"></i></a></td></tr>`;
+                 }
+            display+='</table>';
+            mainContent.innerHTML = display;
             } catch (error) {
                 console.error(error.message);
             };
