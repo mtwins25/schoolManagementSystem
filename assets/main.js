@@ -19,6 +19,22 @@ const addBuilding = document.querySelector("#addBuilding");
 // main content constant
 const mainContent = document.querySelector("#mainContent");
 
+//student grade map
+const studentGrade = new Map();
+
+studentGrade.set(1,"الاول الابتدائي");
+studentGrade.set(2,"الثاني الابتدائي");
+studentGrade.set(3,"الثالث الابتدائي");
+studentGrade.set(4,"الرابع الابتدائي");
+studentGrade.set(5,"الخامس الابتدائي");
+studentGrade.set(6,"السادس الابتدائي");
+studentGrade.set(7,"الاول الاعدادي");
+studentGrade.set(8,"الثاني الاعدادي");
+studentGrade.set(9,"الثالث الاعدادي");
+studentGrade.set(10,"الاول الثانوي");
+studentGrade.set(11,"الثاني الثانوي");
+studentGrade.set(12,"الثالث الثانوي");
+
 // event listeners
 dashboard.addEventListener("click", async () => 
     {
@@ -79,7 +95,7 @@ showStudents.addEventListener("click", async () =>
             display='<table class="table table-striped table-hover">\n<tr><th>م</th><th>الرقم القومي</th><th>الاسم</th><th>الصف</th><th>الفصل</th><th>العمليات</th></tr>';
             for (let i = 0; i < result.length; i++)
                  {
-                    display+=`<tr> <td>${i+1}</td>\n <td>${result[i].nId}</td>\n <td>${result[i].studentName}</td>\n <td>${result[i].grade}</td>\n <td><a class="classRoomLink "href="#" data-classRoomId="${result[i].classRoomId}">${result[i].classRoomName}</a></td>\n <td><a class="studentDetailsLink" href="#" data-studentId="${result[i].studentId}"> <i class="bi bi-person-lines-fill" style="font-size: 20px"></i></a> <a class="studentEditingLink ms-3" href="#" data-studentId="${result[i].studentId}"><i class="bi bi-pen-fill" style="font-size: 20px"></i></a> <a class="studentDeleteLink ms-3" href="#" data-studentId="${result[i].studentId}"> <i class="bi bi-trash-fill" style="font-size: 20px"></i></a> </td> </tr>\n`;
+                    display+=`<tr> <td>${i+1}</td>\n <td>${result[i].nId}</td>\n <td>${result[i].studentName}</td>\n <td>${studentGrade.get(result[i].grade)}</td>\n <td><a class="classRoomLink "href="#" data-classRoomId="${result[i].classRoomId}">${result[i].classRoomName}</a></td>\n <td><a class="studentDetailsLink" href="#" data-studentId="${result[i].studentId}"> <i class="bi bi-person-lines-fill" style="font-size: 20px"></i></a> <a class="studentEditingLink ms-3" href="#" data-studentId="${result[i].studentId}"><i class="bi bi-pen-fill" style="font-size: 20px"></i></a> <a class="studentDeleteLink ms-3" href="#" data-studentId="${result[i].studentId}"> <i class="bi bi-trash-fill" style="font-size: 20px"></i></a> </td> </tr>\n`;
                  }
             display+='</table>';
             mainContent.innerHTML = display;
