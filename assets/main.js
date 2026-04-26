@@ -251,27 +251,23 @@ mainContent.addEventListener("click",  (event) =>
     {
         if (event.target.closest(".studentDetailsLink"))
             {
-                alert("student details");
                 studentDetailsLink = event.target.closest(".studentDetailsLink");
-                console.log(studentDetailsLink.dataset.studentId);
+                alert(studentDetailsLink.dataset.studentid);
             }
         else if (event.target.closest(".studentEditingLink"))
             {
-                alert("student editing");
                 studentEditingLink = event.target.closest(".studentEditingLink");
-                console.log(studentEditingLink.dataset.studentId);   
+                alert(studentEditingLink.dataset.studentid);
             }
         else if (event.target.closest(".studentDeleteLink"))
             {
-                alert("student delete");
                 studentDeleteLink = event.target.closest(".studentDeleteLink");
-                console.log(studentDeleteLink.dataset.studentId);          
+                alert(studentDeleteLink.dataset.studentid);          
             }
         else if (event.target.closest(".classRoomLink"))
             {  
-                 alert("class room details");
                 classRoomLink = event.target.closest(".classRoomLink");
-                console.log(classRoomLink.dataset.classRoomId);          
+                alert(classRoomLink.dataset.classroomid);          
             }
     });
 
