@@ -1,3 +1,7 @@
+body
+    {
+        background-color: #ebebeb;
+    }
 a
     {
         color: #14436F !important;
@@ -8,6 +12,11 @@ a:hover
         color: #B99557!important;
         text-decoration: none;
     }
+a.deleteLink:hover
+    {
+        color: #f80404!important;
+        text-decoration: none;
+    }
 
 h5
     {
@@ -16,6 +25,17 @@ h5
 ul
     {
         list-style-type: none;
+    }
+th
+    {
+         text-align:center !important;
+        color: #ffffff !important;
+        background-color: #14436F !important;
+    }
+td
+    {
+        text-align:center !important;
+        color: #14436F !important;
     }
 
 /* bootstrap modifications */

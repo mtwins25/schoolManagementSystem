@@ -1,15 +1,22 @@
 // main constants
+// dashboard constant
 const dashboard = document.querySelector("#dashboard");
+//teachers constants
 const showTeachers = document.querySelector("#showTeachers");
 const addTeacher = document.querySelector("#addTeacher");
+// students constants
 const showStudents = document.querySelector("#showStudents");
 const addStudent = document.querySelector("#addStudent");
+// subjects constants
 const showSubjects = document.querySelector("#showSubjects");
 const addSubject = document.querySelector("#addSubject");
-const showClasseRooms = document.querySelector("#showClassRooms");
+// classRooms constants
+const showClassRooms = document.querySelector("#showClassRooms");
 const addClassRoom = document.querySelector("#addClassRoom");
+// buildings constants
 const showBuildings = document.querySelector("#showBuildings");
 const addBuilding = document.querySelector("#addBuilding");
+// main content constant
 const mainContent = document.querySelector("#mainContent");
 
 // event listeners
@@ -72,10 +79,11 @@ showStudents.addEventListener("click", async () =>
             display='<table class="table table-striped table-hover">\n<tr><th>م</th><th>الرقم القومي</th><th>الاسم</th><th>الصف</th><th>الفصل</th><th>العمليات</th></tr>';
             for (let i = 0; i < result.length; i++)
                  {
-                    display+=`<tr><td>${i+1}</td><td>${result[i].nId}</td><td>${result[i].studentName}</td><td>${result[i].grade}</td><td>,<a href="#" data-classRoomId="${result[i].classRoomId}">${result[i].classRoomName}</a></td><td><a class="detailsLink ms-3" href="#" data-studentId="${result[i].studentId}"> <i class="bi bi-person-lines-fill"></i></a><a class="editingLink ms-3" href="#" data-studentId="${result[i].studentId}"><i class="bi bi-pen-fill"></i></a><a class="deleteLink ms-3" href="#" data-studentId="${result[i].studentId}"> <i class="bi bi-trash-fill"></i></a></td></tr>`;
+                    display+=`<tr> <td>${i+1}</td>\n <td>${result[i].nId}</td>\n <td>${result[i].studentName}</td>\n <td>${result[i].grade}</td>\n <td><a class="classRoomLink "href="#" data-classRoomId="${result[i].classRoomId}">${result[i].classRoomName}</a></td>\n <td><a class="studentDetailsLink" href="#" data-studentId="${result[i].studentId}"> <i class="bi bi-person-lines-fill" style="font-size: 20px"></i></a> <a class="studentEditingLink ms-3" href="#" data-studentId="${result[i].studentId}"><i class="bi bi-pen-fill" style="font-size: 20px"></i></a> <a class="studentDeleteLink ms-3" href="#" data-studentId="${result[i].studentId}"> <i class="bi bi-trash-fill" style="font-size: 20px"></i></a> </td> </tr>\n`;
                  }
             display+='</table>';
             mainContent.innerHTML = display;
+
             } catch (error) {
                 console.error(error.message);
             };
@@ -222,3 +230,32 @@ addBuilding.addEventListener("click", async () =>
                 console.error(error.message);
             };
     });
+// other event listeners
+mainContent.addEventListener("click",  (event) =>
+    {
+        if (event.target.closest(".studentDetailsLink"))
+            {
+                alert("student details");
+                studentDetailsLink = event.target.closest(".studentDetailsLink");
+                console.log(studentDetailsLink.dataset.studentId);
+            }
+        else if (event.target.closest(".studentEditingLink"))
+            {
+                alert("student editing");
+                studentEditingLink = event.target.closest(".studentEditingLink");
+                console.log(studentEditingLink.dataset.studentId);   
+            }
+        else if (event.target.closest(".studentDeleteLink"))
+            {
+                alert("student delete");
+                studentDeleteLink = event.target.closest(".studentDeleteLink");
+                console.log(studentDeleteLink.dataset.studentId);          
+            }
+        else if (event.target.closest(".classRoomLink"))
+            {  
+                 alert("class room details");
+                classRoomLink = event.target.closest(".classRoomLink");
+                console.log(classRoomLink.dataset.classRoomId);          
+            }
+    });
+

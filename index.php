@@ -160,7 +160,7 @@
     </div>
     <!-- end of offcanvas  -->
     <!-- main container -->
-    <div id="mainContent" class="container text-center">
+    <div id="mainContent" class="container w-75 h-75 mt-5 text-center" style="background-color: white;">
         
         <!-- main page content -->
         <div class="row">
