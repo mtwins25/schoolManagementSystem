@@ -10,9 +10,9 @@ const addStudent = document.querySelector("#addStudent");
 // subjects constants
 const showSubjects = document.querySelector("#showSubjects");
 const addSubject = document.querySelector("#addSubject");
-// classRooms constants
-const showClassRooms = document.querySelector("#showClassRooms");
-const addClassRoom = document.querySelector("#addClassRoom");
+// classrooms constants
+const showClassrooms = document.querySelector("#showClassrooms");
+const addClassroom = document.querySelector("#addClassroom");
 // buildings constants
 const showBuildings = document.querySelector("#showBuildings");
 const addBuilding = document.querySelector("#addBuilding");
@@ -95,7 +95,7 @@ showStudents.addEventListener("click", async () =>
             display='<table class="table table-striped table-hover">\n<tr><th>م</th><th>الرقم القومي</th><th>الاسم</th><th>الصف</th><th>الفصل</th><th>العمليات</th></tr>';
             for (let i = 0; i < result.length; i++)
                  {
-                    display+=`<tr> <td>${i+1}</td>\n <td>${result[i].nId}</td>\n <td>${result[i].studentName}</td>\n <td>${studentGrade.get(result[i].grade)}</td>\n <td><a class="classRoomLink "href="#" data-classRoomId="${result[i].classRoomId}">${result[i].classRoomName}</a></td>\n <td><a class="studentDetailsLink" href="#" data-studentId="${result[i].studentId}"> <i class="bi bi-person-lines-fill" style="font-size: 20px"></i></a> <a class="studentEditingLink ms-3" href="#" data-studentId="${result[i].studentId}"><i class="bi bi-pen-fill" style="font-size: 20px"></i></a> <a class="studentDeleteLink ms-3" href="#" data-studentId="${result[i].studentId}"> <i class="bi bi-trash-fill" style="font-size: 20px"></i></a> </td> </tr>\n`;
+                    display+=`<tr> <td>${i+1}</td>\n <td>${result[i].nId}</td>\n <td>${result[i].studentName}</td>\n <td>${studentGrade.get(result[i].grade)}</td>\n <td><a class="classroomLink "href="#" data-classroomId="${result[i].classroomId}">${result[i].classroomName}</a></td>\n <td><a class="studentDetailsLink" href="#" data-studentId="${result[i].studentId}"> <i class="bi bi-person-lines-fill" style="font-size: 20px"></i></a> <a class="studentEditingLink ms-3" href="#" data-studentId="${result[i].studentId}"><i class="bi bi-pen-fill" style="font-size: 20px"></i></a> <a class="studentDeleteLink ms-3" href="#" data-studentId="${result[i].studentId}"> <i class="bi bi-trash-fill" style="font-size: 20px"></i></a> </td> </tr>\n`;
                  }
             display+='</table>';
             mainContent.innerHTML = display;
@@ -167,10 +167,10 @@ addSubject.addEventListener("click", async () =>
                 console.error(error.message);
             };
     });
-// classRooms event listeners
-showClassRooms.addEventListener("click", async () => 
+// classrooms event listeners
+showClassrooms.addEventListener("click", async () => 
     {
-        const url = "classRooms";
+        const url = "classrooms";
         try {
             const response = await fetch(url);
             if (!response.ok) 
@@ -184,10 +184,10 @@ showClassRooms.addEventListener("click", async () =>
                 console.error(error.message);
             };
     });
-addClassRoom.addEventListener("click", async () => 
+addClassroom.addEventListener("click", async () => 
     {
         let data;
-        const url = "classRooms";
+        const url = "classrooms";
         try {
             const response = await fetch(url, 
                 {
@@ -264,10 +264,10 @@ mainContent.addEventListener("click",  (event) =>
                 studentDeleteLink = event.target.closest(".studentDeleteLink");
                 alert(studentDeleteLink.dataset.studentid);          
             }
-        else if (event.target.closest(".classRoomLink"))
+        else if (event.target.closest(".classroomLink"))
             {  
-                classRoomLink = event.target.closest(".classRoomLink");
-                alert(classRoomLink.dataset.classroomid);          
+                classroomLink = event.target.closest(".classroomLink");
+                alert(classroomLink.dataset.classroomid);          
             }
     });
 

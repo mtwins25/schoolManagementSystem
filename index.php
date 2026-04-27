@@ -127,9 +127,9 @@
                     <div id="collapseFour" class="accordion-collapse collapse " data-bs-parent="#accordionExample">
                         <div class="accordion-body">
                             <ul>
-                                <li><a id="showClassRooms" href="#"  data-bs-dismiss="offcanvas">عرض</a></li>
+                                <li><a id="showClassrooms" href="#"  data-bs-dismiss="offcanvas">عرض</a></li>
                                 <hr>
-                                <li><a id="addClassRoom" href="#"  data-bs-dismiss="offcanvas">اضافة</a></li> 
+                                <li><a id="addClassroom" href="#"  data-bs-dismiss="offcanvas">اضافة</a></li> 
                             </ul>
                         </div>
                     </div>

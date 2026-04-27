@@ -2,7 +2,7 @@
 require  __DIR__.'/../../vendor/autoload.php';
 require  __DIR__.'/../model/databaseConnection.php';
 use MyApp\model\Building;
-use MyApp\model\ClassRoom;
+use MyApp\model\Classroom;
 use MyApp\model\Student;
 use MyApp\model\Teacher;
 use MyApp\model\Subject;
@@ -25,8 +25,8 @@ $result=match ($route[2])
             $innerResult=match ($method) 
                 {
                     'GET' => isset($route[3])? Student::getStudent($con, $route[3]):Student::getStudents($con),
-                    'POST' => Student::addStudent($con, $data['nId'], $data['name'], $data['DOB'], $data['gender'], $data['religion'], $data['guardianName'], $data['guardianPhoneNo'],$data['grade'], $data['feesPaid'], $data['passed'], $data['classRoomId']),
-                    'PUT' => Student::updateStudent($con,$data['id'], $data['nId'], $data['name'], $data['DOB'], $data['gender'], $data['religion'], $data['guardianName'], $data['guardianPhoneNo'],$data['grade'], $data['feesPaid'], $data['passed'], $data['classRoomId']),
+                    'POST' => Student::addStudent($con, $data['nId'], $data['name'], $data['DOB'], $data['gender'], $data['religion'], $data['guardianName'], $data['guardianPhoneNo'],$data['grade'], $data['feesPaid'], $data['passed'], $data['classroomId']),
+                    'PUT' => Student::updateStudent($con,$data['id'], $data['nId'], $data['name'], $data['DOB'], $data['gender'], $data['religion'], $data['guardianName'], $data['guardianPhoneNo'],$data['grade'], $data['feesPaid'], $data['passed'], $data['classroomId']),
                     'DELETE' => Student::deleteStudent($con,$route[3]),
                     default => http_response_code(405)
                 },
@@ -51,13 +51,13 @@ $result=match ($route[2])
                     default => http_response_code(405)
                 },
 
-        'classRooms' =>
+        'classrooms' =>
             $innerResult=match ($method) 
                 {
-                    'GET' => isset($route[3])? ClassRoom::getClassRoom($con, $route[3]):ClassRoom::getClassRooms($con),
-                    'POST' => ClassRoom::addClassroom($con, $data['buildingId'], $data['name'], $data['grade'], $data['girlsNo'], $data['boysNo'], $data['muslimStdNo'], $data['christianStdNo'], $data['frenchStdNo'], $data['germanStdNo'], $data['italianStdNo']),
-                    'PUT' => ClassRoom::updateClassroom($con, $data['id'], $data['buildingId'], $data['name'], $data['grade'], $data['girlsNo'], $data['boysNo'], $data['muslimStdNo'], $data['christianStdNo'], $data['frenchStdNo'], $data['germanStdNo'], $data['italianStdNo']),
-                    'DELETE' => ClassRoom::deleteClassroom($con, $route[3]),
+                    'GET' => isset($route[3])? Classroom::getClassroom($con, $route[3]):Classroom::getClassrooms($con),
+                    'POST' => Classroom::addClassroom($con, $data['buildingId'], $data['name'], $data['grade'], $data['girlsNo'], $data['boysNo'], $data['muslimStdNo'], $data['christianStdNo'], $data['frenchStdNo'], $data['germanStdNo'], $data['italianStdNo']),
+                    'PUT' => Classroom::updateClassroom($con, $data['id'], $data['buildingId'], $data['name'], $data['grade'], $data['girlsNo'], $data['boysNo'], $data['muslimStdNo'], $data['christianStdNo'], $data['frenchStdNo'], $data['germanStdNo'], $data['italianStdNo']),
+                    'DELETE' => Classroom::deleteClassroom($con, $route[3]),
                     default => http_response_code(405)
                 },
 
@@ -65,8 +65,8 @@ $result=match ($route[2])
             $innerResult=match ($method) 
                 {
                     'GET' => isset($route[3])? Building::getBuilding($con, $route[3]):Building::getBuildings($con),
-                    'POST' => Building::addBuilding($con, $data['name'], $data['floorsNo'], $data['classRoomNo']),
-                    'PUT' => Building::updateBuilding($con, $data['id'], $data['name'], $data['floorsNo'], $data['classRoomNo']),
+                    'POST' => Building::addBuilding($con, $data['name'], $data['floorsNo'], $data['classroomNo']),
+                    'PUT' => Building::updateBuilding($con, $data['id'], $data['name'], $data['floorsNo'], $data['classroomNo']),
                     'DELETE' => Building::deleteBuilding($con, $route[3]),
                     default => http_response_code(405)
                 },

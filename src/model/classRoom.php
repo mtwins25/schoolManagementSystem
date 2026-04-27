@@ -1,6 +1,6 @@
 <?php
 namespace MyApp\model;
-class ClassRoom {
+class Classroom {
     	public $id;
         public $buildingId;
         public $name;
@@ -28,39 +28,39 @@ class ClassRoom {
             $this->italianStdNo = $italianStdNo;
 
         }
-    static function getclassRooms($con) 
+    static function getclassrooms($con) 
             {
-                $sql = "SELECT buildings.id as buildingId, buildings.name as buildingName, classRooms.id as classRoomId, classRooms.name as classRoomName,grade,girlsNo,boysNO FROM buildings join classRooms on buildings.id = classRooms.buildingId";
+                $sql = "SELECT buildings.id as buildingId, buildings.name as buildingName, classrooms.id as classroomId, classrooms.name as classroomName,grade,girlsNo,boysNO FROM buildings join classrooms on buildings.id = classrooms.buildingId";
                 $result = $con->query($sql)->fetchAll(\PDO::FETCH_ASSOC);
                 
                 return $result;
             }
 
-    static function getClassRoom($con, $id) 
+    static function getClassroom($con, $id) 
             {
-                $sql = "SELECT buildings.id as buildingId, buildings.name as buildingName,floorsNo,classRoomNo, classRooms.id as classRoomId, classRooms.name as classRoomName,grade,girlsNo,boysNO,muslimStdNo,christianStdNo,frenchStdNo,germanStdNo,italianStdNo	
-                        FROM buildings join classRooms on buildings.id = classRooms.buildingId WHERE classRooms.id = $id";
+                $sql = "SELECT buildings.id as buildingId, buildings.name as buildingName,floorsNo,classroomNo, classrooms.id as classroomId, classrooms.name as classroomName,grade,girlsNo,boysNO,muslimStdNo,christianStdNo,frenchStdNo,germanStdNo,italianStdNo	
+                        FROM buildings join classrooms on buildings.id = classrooms.buildingId WHERE classrooms.id = $id";
                 $result = $con->query($sql)->fetch(\PDO::FETCH_ASSOC);
                 
                 return $result;
             }
-    static function addClassRoom($con, $buildingId, $name, $grade, $girlsNo, $boysNo, $muslimStdNo, $christianStdNo, $frenchStdNo, $germanStdNo, $italianStdNo) 
+    static function addClassroom($con, $buildingId, $name, $grade, $girlsNo, $boysNo, $muslimStdNo, $christianStdNo, $frenchStdNo, $germanStdNo, $italianStdNo) 
             {
-                $sql = "INSERT INTO classRooms(buildingId, name, grade, girlsNo, boysNo, muslimStdNo, christianStdNo, frenchStdNo, germanStdNo, italianStdNo) VALUES ($buildingId, $name, $grade, $girlsNo, $boysNo, $muslimStdNo, $christianStdNo, $frenchStdNo, $germanStdNo, $italianStdNo)";
+                $sql = "INSERT INTO classrooms(buildingId, name, grade, girlsNo, boysNo, muslimStdNo, christianStdNo, frenchStdNo, germanStdNo, italianStdNo) VALUES ($buildingId, $name, $grade, $girlsNo, $boysNo, $muslimStdNo, $christianStdNo, $frenchStdNo, $germanStdNo, $italianStdNo)";
                 $result = $con->query($sql);
                 
                 return $result;
             }
-    static function updateClassRoom($con, $id, $buildingId, $name, $grade, $girlsNo, $boysNo, $muslimStdNo, $christianStdNo, $frenchStdNo, $germanStdNo, $italianStdNo) 
+    static function updateClassroom($con, $id, $buildingId, $name, $grade, $girlsNo, $boysNo, $muslimStdNo, $christianStdNo, $frenchStdNo, $germanStdNo, $italianStdNo) 
             {
-                $sql = "UPDATE classRooms SET buildingId = $buildingId, name = $name, grade = $grade, girlsNo = $girlsNo, boysNo = $boysNo, muslimStdNo = $muslimStdNo, christianStdNo = $christianStdNo, frenchStdNo = $frenchStdNo, germanStdNo = $germanStdNo, italianStdNo = $italianStdNo WHERE id = $id";
+                $sql = "UPDATE classrooms SET buildingId = $buildingId, name = $name, grade = $grade, girlsNo = $girlsNo, boysNo = $boysNo, muslimStdNo = $muslimStdNo, christianStdNo = $christianStdNo, frenchStdNo = $frenchStdNo, germanStdNo = $germanStdNo, italianStdNo = $italianStdNo WHERE id = $id";
                 $result = $con->query($sql);
                 
                 return $result;
             }
-       static function deleteClassRoom($con,$id) 
+       static function deleteClassroom($con,$id) 
             {
-                $sql = "DELETE from classRooms WHERE id = $id";
+                $sql = "DELETE from classrooms WHERE id = $id";
                 $result = $con->query($sql);
                 
                 return $result;
