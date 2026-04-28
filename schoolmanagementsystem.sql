@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 25, 2026 at 11:43 PM
+-- Generation Time: Apr 27, 2026 at 02:45 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -190,6 +190,17 @@ CREATE TABLE `subjects` (
   `name` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Dumping data for table `subjects`
+--
+
+INSERT INTO `subjects` (`id`, `name`) VALUES
+(5, 'دراسات اجتماعية'),
+(2, 'رياضيات'),
+(4, 'علوم'),
+(3, 'لغة انجليزية'),
+(1, 'لغة عربية');
+
 -- --------------------------------------------------------
 
 --
@@ -215,24 +226,24 @@ CREATE TABLE `teachers` (
 --
 
 INSERT INTO `teachers` (`id`, `nID`, `rank`, `phoneNo`, `name`, `DOB`, `DOG`, `DOE`, `periodsExNo`, `periodsAcNo`, `subjectId`) VALUES
-(1, 118, 'beginner', '8355202019', 'Ingmar Ruddin', '0000-00-00', '0000-00-00', '0000-00-00', 3, 34, 9),
+(1, 118, 'beginner', '8355202019', 'Ingmar Ruddin', '0000-00-00', '0000-00-00', '0000-00-00', 3, 34, 1),
 (2, 895, 'experienced', '4064607418', 'Alphard Burrells', '0000-00-00', '0000-00-00', '0000-00-00', 20, 19, 3),
-(3, 605, 'expert', '3456062265', 'Vail Schutte', '0000-00-00', '0000-00-00', '0000-00-00', 22, 21, 14),
-(4, 816, 'experienced', '8247857188', 'Lowe Meade', '0000-00-00', '0000-00-00', '0000-00-00', 48, 28, 6),
-(5, 815, 'experienced', '4411912981', 'Kristopher Carmody', '0000-00-00', '0000-00-00', '0000-00-00', 19, 27, 15),
-(6, 207, 'expert', '1925708689', 'Agna Lynock', '0000-00-00', '0000-00-00', '0000-00-00', 26, 8, 7),
-(7, 855, 'expert', '4233000756', 'Hillard Frances', '0000-00-00', '0000-00-00', '0000-00-00', 44, 26, 6),
-(8, 476, 'intermediate', '1539942091', 'Corny Digby', '0000-00-00', '0000-00-00', '0000-00-00', 29, 43, 15),
-(9, 142, 'beginner', '9903496632', 'Enrico Corradetti', '0000-00-00', '0000-00-00', '0000-00-00', 32, 14, 15),
-(10, 851, 'expert', '3441185743', 'Cassi Schroeder', '0000-00-00', '0000-00-00', '0000-00-00', 9, 7, 9),
-(11, 800, 'beginner', '5415514180', 'Alexandr Luffman', '0000-00-00', '0000-00-00', '0000-00-00', 39, 22, 6),
+(3, 605, 'expert', '3456062265', 'Vail Schutte', '0000-00-00', '0000-00-00', '0000-00-00', 22, 21, 4),
+(4, 816, 'experienced', '8247857188', 'Lowe Meade', '0000-00-00', '0000-00-00', '0000-00-00', 48, 28, 2),
+(5, 815, 'experienced', '4411912981', 'Kristopher Carmody', '0000-00-00', '0000-00-00', '0000-00-00', 19, 27, 5),
+(6, 207, 'expert', '1925708689', 'Agna Lynock', '0000-00-00', '0000-00-00', '0000-00-00', 26, 8, 1),
+(7, 855, 'expert', '4233000756', 'Hillard Frances', '0000-00-00', '0000-00-00', '0000-00-00', 44, 26, 3),
+(8, 476, 'intermediate', '1539942091', 'Corny Digby', '0000-00-00', '0000-00-00', '0000-00-00', 29, 43, 4),
+(9, 142, 'beginner', '9903496632', 'Enrico Corradetti', '0000-00-00', '0000-00-00', '0000-00-00', 32, 14, 2),
+(10, 851, 'expert', '3441185743', 'Cassi Schroeder', '0000-00-00', '0000-00-00', '0000-00-00', 9, 7, 5),
+(11, 800, 'beginner', '5415514180', 'Alexandr Luffman', '0000-00-00', '0000-00-00', '0000-00-00', 39, 22, 4),
 (12, 160, 'intermediate', '5346048553', 'Johannah Firidolfi', '0000-00-00', '0000-00-00', '0000-00-00', 40, 7, 5),
-(13, 673, 'intermediate', '5973030448', 'Llywellyn Cauldwell', '0000-00-00', '0000-00-00', '0000-00-00', 45, 2, 14),
+(13, 673, 'intermediate', '5973030448', 'Llywellyn Cauldwell', '0000-00-00', '0000-00-00', '0000-00-00', 45, 2, 3),
 (14, 298, 'expert', '3015865786', 'Ellerey Adamczewski', '0000-00-00', '0000-00-00', '0000-00-00', 49, 19, 4),
-(15, 676, 'intermediate', '9761131385', 'Sollie Bulgen', '0000-00-00', '0000-00-00', '0000-00-00', 10, 47, 11),
+(15, 676, 'intermediate', '9761131385', 'Sollie Bulgen', '0000-00-00', '0000-00-00', '0000-00-00', 10, 47, 3),
 (16, 538, 'intermediate', '5542196516', 'Dodie Matiebe', '0000-00-00', '0000-00-00', '0000-00-00', 19, 24, 3),
 (17, 480, 'expert', '3074464551', 'Haleigh Smaile', '0000-00-00', '0000-00-00', '0000-00-00', 17, 7, 1),
-(18, 165, 'expert', '8524852267', 'Davin Downe', '0000-00-00', '0000-00-00', '0000-00-00', 31, 12, 9),
+(18, 165, 'expert', '8524852267', 'Davin Downe', '0000-00-00', '0000-00-00', '0000-00-00', 31, 12, 2),
 (19, 185, 'experienced', '4263117658', 'Mickie Danilchev', '0000-00-00', '0000-00-00', '0000-00-00', 41, 12, 11),
 (20, 857, 'expert', '7755855277', 'Claire Cavell', '0000-00-00', '0000-00-00', '0000-00-00', 1, 6, 11),
 (21, 729, 'intermediate', '1305228758', 'Brodie Van der Hoeven', '0000-00-00', '0000-00-00', '0000-00-00', 45, 23, 15),
@@ -323,7 +334,7 @@ ALTER TABLE `students`
 -- AUTO_INCREMENT for table `subjects`
 --
 ALTER TABLE `subjects`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `teachers`

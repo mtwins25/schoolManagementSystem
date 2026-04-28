@@ -52,6 +52,14 @@ showTeachers.addEventListener("click", async () =>
                 }
             
             const result = await response.json();
+            display = '<input id="search" type="text" class="form-control mb-2" placeholder="ابحث">';
+            display+='<table id="table"  class="table table-striped table-hover w-100">\n<tr><th>م</th><th>الرقم القومي</th><th>الاسم</th><th>رقم الهاتف</th><th>المرتبة</th><th>المادة</th><th>العمليات</th></tr>';
+            for (let i = 0; i < result.length; i++)
+                 {
+                    display+=`<tr> <td>${i+1}</td>\n <td>${result[i].nId}</td>\n <td>${result[i].teacherName}</td>\n <td>${result[i].rank}</td>\n <td>${result[i].phoneNo}</td>\n <td><a class="subjectLink "href="#" data-subjectId="${result[i].subjectId}">${result[i].subjectName}</a></td>\n <td><a class="teacherDetailsLink" href="#" data-teacherId="${result[i].teacherId}"> <i class="bi bi-person-lines-fill" style="font-size: 20px"></i></a> <a class="teacherEditingLink ms-3" href="#" data-teacherId="${result[i].teacherId}"><i class="bi bi-pen-fill" style="font-size: 20px"></i></a> <a class="teacherDeleteLink ms-3" href="#" data-teacherId="${result[i].teacherId}"> <i class="bi bi-trash-fill" style="font-size: 20px"></i></a> </td> </tr>\n`;
+                 }
+            display+='</table>';
+            mainContent.innerHTML = display;
             console.log(result);
             } catch (error) {
                 console.error(error.message);
@@ -92,13 +100,16 @@ showStudents.addEventListener("click", async () =>
                 }
             
             const result = await response.json();
-            display='<table class="table table-striped table-hover">\n<tr><th>م</th><th>الرقم القومي</th><th>الاسم</th><th>الصف</th><th>الفصل</th><th>العمليات</th></tr>';
+            display = '<input id="search"  type="text" class="form-control mb-2" placeholder="ابحث">';
+            display+='<table id="table" class="table table-striped table-hover w-100">\n<tr><th>م</th><th>الرقم القومي</th><th>الاسم</th><th>الصف</th><th>الفصل</th><th>العمليات</th></tr>';
             for (let i = 0; i < result.length; i++)
                  {
                     display+=`<tr> <td>${i+1}</td>\n <td>${result[i].nId}</td>\n <td>${result[i].studentName}</td>\n <td>${studentGrade.get(result[i].grade)}</td>\n <td><a class="classroomLink "href="#" data-classroomId="${result[i].classroomId}">${result[i].classroomName}</a></td>\n <td><a class="studentDetailsLink" href="#" data-studentId="${result[i].studentId}"> <i class="bi bi-person-lines-fill" style="font-size: 20px"></i></a> <a class="studentEditingLink ms-3" href="#" data-studentId="${result[i].studentId}"><i class="bi bi-pen-fill" style="font-size: 20px"></i></a> <a class="studentDeleteLink ms-3" href="#" data-studentId="${result[i].studentId}"> <i class="bi bi-trash-fill" style="font-size: 20px"></i></a> </td> </tr>\n`;
                  }
             display+='</table>';
             mainContent.innerHTML = display;
+            const searchBar=document.querySelector("#search");
+            searchBar.addEventListener("keyup",search(searchBar.value));
 
             } catch (error) {
                 console.error(error.message);
@@ -269,5 +280,50 @@ mainContent.addEventListener("click",  (event) =>
                 classroomLink = event.target.closest(".classroomLink");
                 alert(classroomLink.dataset.classroomid);          
             }
+        else if (event.target.closest(".teacherDetailsLink"))
+            {
+                teacherDetailsLink = event.target.closest(".teacherDetailsLink");
+                alert(teacherDetailsLink.dataset.teacherid);
+            }
+        else if (event.target.closest(".teacherEditingLink"))
+            {
+                teacherEditingLink = event.target.closest(".teacherEditingLink");
+                alert(teacherEditingLink.dataset.teacherid);
+            }
+        else if (event.target.closest(".teacherDeleteLink"))
+            {
+                teacherDeleteLink = event.target.closest(".teacherDeleteLink");
+                alert(teacherDeleteLink.dataset.teacherid);          
+            }
+        
     });
+
+//functions
+
+function search(input) {
+  // Declare variables
+  let filter, table, tr, td, i, j, txtValue;
+  filter = input.value.toUpperCase();
+  table = document.querySelector("#table");
+  tr = table.getElementsByTagName("tr");
+
+  // Loop through all table rows, and hide those who don't match the search query
+  for (i = 0; i < tr.length; i++) 
+    {
+        for(j=0; j<tr[i].getElementsByTagName("td").length; j++)
+            {
+
+            
+                td = tr[i].getElementsByTagName("td")[j];
+                if (td) {
+                  txtValue = td.textContent || td.innerText;
+                  if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                    tr[i].style.display = "";
+                  } else {
+                    tr[i].style.display = "none";
+                  }
+            }
+        }
+    }
+}
 
