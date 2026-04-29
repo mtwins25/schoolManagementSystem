@@ -38,6 +38,34 @@ td
         color: #14436F !important;
     }
 
+
+
+.pagination {
+    text-align: center;
+    margin-top: 2rem;
+    margin-right: 35%;
+    margin-bottom: 2rem;
+}
+
+.pagination a {
+    color: #14436F;
+    padding: 8px 16px;
+    text-decoration: none;
+    border: 1px solid #14436F;
+    margin: 0 5px;
+    border-radius: 4px;
+}
+
+.pagination a:hover {
+    background-color: #14436F;
+    color: white !important;
+}
+
+.pagination .active {
+    background-color: #14436F;
+    color: white !important;
+}
+
 /* bootstrap modifications */
 .form-control:focus
     {

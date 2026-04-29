@@ -19,6 +19,7 @@ const addBuilding = document.querySelector("#addBuilding");
 // main content constant
 const mainContent = document.querySelector("#mainContent");
 
+
 //student grade map
 const studentGrade = new Map();
 
@@ -54,19 +55,77 @@ showTeachers.addEventListener("click", async () =>
             
             const result = await response.json();
             // result display
+            //adding header
             display = "<h4>المدرسين</h4>";
+            //adding search bar
             display += '<input id="search" type="text" class="form-control mb-2" placeholder="ابحث">';
+            // adding table headers and then filling it with data
             display+='<table id="table"  class="table table-striped table-hover w-100" >\n<tr><th>م</th><th>الرقم القومي</th><th>الاسم</th><th>رقم الهاتف</th><th>المرتبة</th><th>المادة</th><th>العمليات</th></tr>';
             for (let i = 0; i < result.length; i++)
                  {
                     display+=`<tr> <td>${i+1}</td>\n <td>${result[i].nId}</td>\n <td>${result[i].teacherName}</td>\n <td>${result[i].phoneNo}</td>\n <td>${result[i].rank}</td>\n <td><a class="subjectLink "href="#" data-subjectId="${result[i].subjectId}">${result[i].subjectName}</a></td>\n <td><a class="teacherDetailsLink" href="#" data-teacherId="${result[i].teacherId}"> <i class="bi bi-person-lines-fill" style="font-size: 20px"></i></a> <a class="teacherEditingLink ms-3" href="#" data-teacherId="${result[i].teacherId}"><i class="bi bi-pen-fill" style="font-size: 20px"></i></a> <a class="teacherDeleteLink ms-3" href="#" data-teacherId="${result[i].teacherId}"> <i class="bi bi-trash-fill" style="font-size: 20px"></i></a> </td> </tr>\n`;
                  }
+            // closing table
             display+='</table>';
+            // adding pagination elements
+            const totalPages = Math.ceil(result.length / 10); 
+             display+=`<div class="pagination" id="pagination">\n<a href="#" id="prev">السابق</a>`;
+            for (let i = 0; i < totalPages; i++)
+                {
+                    display+=`<a href="#" class="page-link" data-page="${i+1}">${i+1}</a>\n`;
+                }
+            display+=`<a href="#" id="next">التالي</a>\n</div>`;
             mainContent.innerHTML = display;
+
+            // pagination
+            const pagination = document.getElementById('pagination'); 
+            const prevButton = document.getElementById('prev'); 
+            const nextButton = document.getElementById('next'); 
+            const pageLinks = document.querySelectorAll('.page-link'); 
+            // console.log(pageLinks);
+            let currentPage = 1;
+            // Event listener for "Previous" button 
+            prevButton.addEventListener('click', () => { 
+            	if (currentPage > 1) 
+                    { 
+            	    	currentPage--; 
+            	    	displayPage(currentPage); 
+            	    	updatePagination(pageLinks,currentPage); 
+            	    } 
+            }); 
+
+            // Event listener for "Next" button 
+            nextButton.addEventListener('click', () => { 
+            	if (currentPage < totalPages) 
+                    { 
+            	    	currentPage++; 
+            	    	displayPage(currentPage); 
+            	    	updatePagination(pageLinks,currentPage); 
+            	    } 
+            }); 
+
+            // Event listener for page number buttons 
+            pageLinks.forEach((link) => { 
+            	link.addEventListener('click', (e) => { 
+            		e.preventDefault(); 
+            		const page = parseInt(link.getAttribute('data-page')); 
+            		if (page !== currentPage) 
+                        { 
+            		    	currentPage = page; 
+            		    	displayPage(currentPage); 
+            		    	updatePagination(pageLinks,currentPage); 
+            		    } 
+            	}); 
+            });
             
+            // Initial page load 
+            displayPage(currentPage); 
+            updatePagination(pageLinks,currentPage);
+
             // searching
             const searchBar=document.querySelector("#search");
-            searchBar.addEventListener("keyup",()=>{search(searchBar.value)});
+            searchBar.addEventListener("keyup",()=>{search(searchBar.value,pageLinks)});
+
             } catch (error) {
                 console.error(error.message);
             };
@@ -106,8 +165,11 @@ showStudents.addEventListener("click", async () =>
                 }
             
             const result = await response.json();
+            //adding header
             display = "<h4>الطلاب</h4>";
+            //adding search bar
             display += '<input id="search"  type="text" class="form-control mb-2" placeholder="ابحث">';
+            //adding table headers and then filling it with data
             display+='<table id="table" class="table table-striped table-hover w-100">\n<tr><th>م</th><th>الرقم القومي</th><th>الاسم</th><th>الصف</th><th>الفصل</th><th>العمليات</th></tr>';
             for (let i = 0; i < result.length; i++)
                  {
@@ -265,6 +327,7 @@ addBuilding.addEventListener("click", async () =>
             };
     });
 // other event listeners
+// event delegation for dynamic content
 mainContent.addEventListener("click",  (event) =>
     {
         if (event.target.closest(".studentDetailsLink"))
@@ -305,9 +368,11 @@ mainContent.addEventListener("click",  (event) =>
         
     });
 
+
 //functions
 
-function search(input) 
+// searching function
+function search(input,pageLinks) 
     {
         // Declare variables
         let filter = input.toUpperCase();
@@ -325,7 +390,12 @@ function search(input)
                       if (td) 
                           {
                               let txtValue = td.textContent || td.innerText;
-                              if (txtValue.toUpperCase().indexOf(filter) > -1) 
+                              if (txtValue.toUpperCase().indexOf(filter)=="")
+                                {
+                                    displayPage(1); 
+                                    updatePagination(pageLinks,1);
+                                }
+                              else if (txtValue.toUpperCase().indexOf(filter) > -1) 
                                   {
                                     console.log("found");
                                       tr[i].style.display = "";
@@ -339,4 +409,37 @@ function search(input)
                   }
           }
     }
+// pagination functions
+// Function to display rows for a specific page 
+function displayPage(page) 
+    { 
+    	const startIndex = (page - 1) * 10; 
+    	const endIndex = startIndex + 10; 
+        const table= document.querySelector('#table');
+        const trs= table.querySelectorAll('tr');
+
+        for (let i = 1; i < trs.length; i++) 
+            {
+   
+    		    if (i > startIndex && i <= endIndex) 
+                    { 
+    		    	    trs[i].style.display = ''; 
+    		        } 
+                else 
+                    { 
+    		    	trs[i].style.display = 'none'; 
+    		        } 
+            }
+                
+            
+    } 
+
+// Function to update pagination buttons and page numbers 
+function updatePagination(pageLinks,currentPage) 
+    { 
+     	pageLinks.forEach((link) => { 
+    		const page = parseInt(link.getAttribute('data-page')); 
+    		link.classList.toggle('active', page === currentPage); 
+    	}); 
+    } 
 
