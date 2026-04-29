@@ -108,7 +108,7 @@ showTeachers.addEventListener("click", async () =>
             pageLinks.forEach((link) => { 
             	link.addEventListener('click', (e) => { 
             		e.preventDefault(); 
-            		const page = parseInt(link.getAttribute('data-page')); 
+            		const page = parseInt(link.dataset.page); 
             		if (page !== currentPage) 
                         { 
             		    	currentPage = page; 
@@ -389,6 +389,7 @@ function search(input,pageLinks)
                       let td = tr[i].getElementsByTagName("td")[j];
                       if (td) 
                           {
+                            // to handle pagination correctly
                               let txtValue = td.textContent || td.innerText;
                               if (txtValue.toUpperCase().indexOf(filter)=="")
                                 {
@@ -438,7 +439,7 @@ function displayPage(page)
 function updatePagination(pageLinks,currentPage) 
     { 
      	pageLinks.forEach((link) => { 
-    		const page = parseInt(link.getAttribute('data-page')); 
+    		const page = parseInt(link.dataset.page); 
     		link.classList.toggle('active', page === currentPage); 
     	}); 
     } 
