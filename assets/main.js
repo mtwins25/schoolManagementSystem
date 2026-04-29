@@ -43,6 +43,7 @@ dashboard.addEventListener("click", async () =>
 // teachers event listeners
 showTeachers.addEventListener("click", async () => 
     {
+        // fetching data
         const url = "teachers";
         try {
             const response = await fetch(url);
@@ -52,15 +53,20 @@ showTeachers.addEventListener("click", async () =>
                 }
             
             const result = await response.json();
-            display = '<input id="search" type="text" class="form-control mb-2" placeholder="ابحث">';
-            display+='<table id="table"  class="table table-striped table-hover w-100">\n<tr><th>م</th><th>الرقم القومي</th><th>الاسم</th><th>رقم الهاتف</th><th>المرتبة</th><th>المادة</th><th>العمليات</th></tr>';
+            // result display
+            display = "<h4>المدرسين</h4>";
+            display += '<input id="search" type="text" class="form-control mb-2" placeholder="ابحث">';
+            display+='<table id="table"  class="table table-striped table-hover w-100" >\n<tr><th>م</th><th>الرقم القومي</th><th>الاسم</th><th>رقم الهاتف</th><th>المرتبة</th><th>المادة</th><th>العمليات</th></tr>';
             for (let i = 0; i < result.length; i++)
                  {
-                    display+=`<tr> <td>${i+1}</td>\n <td>${result[i].nId}</td>\n <td>${result[i].teacherName}</td>\n <td>${result[i].rank}</td>\n <td>${result[i].phoneNo}</td>\n <td><a class="subjectLink "href="#" data-subjectId="${result[i].subjectId}">${result[i].subjectName}</a></td>\n <td><a class="teacherDetailsLink" href="#" data-teacherId="${result[i].teacherId}"> <i class="bi bi-person-lines-fill" style="font-size: 20px"></i></a> <a class="teacherEditingLink ms-3" href="#" data-teacherId="${result[i].teacherId}"><i class="bi bi-pen-fill" style="font-size: 20px"></i></a> <a class="teacherDeleteLink ms-3" href="#" data-teacherId="${result[i].teacherId}"> <i class="bi bi-trash-fill" style="font-size: 20px"></i></a> </td> </tr>\n`;
+                    display+=`<tr> <td>${i+1}</td>\n <td>${result[i].nId}</td>\n <td>${result[i].teacherName}</td>\n <td>${result[i].phoneNo}</td>\n <td>${result[i].rank}</td>\n <td><a class="subjectLink "href="#" data-subjectId="${result[i].subjectId}">${result[i].subjectName}</a></td>\n <td><a class="teacherDetailsLink" href="#" data-teacherId="${result[i].teacherId}"> <i class="bi bi-person-lines-fill" style="font-size: 20px"></i></a> <a class="teacherEditingLink ms-3" href="#" data-teacherId="${result[i].teacherId}"><i class="bi bi-pen-fill" style="font-size: 20px"></i></a> <a class="teacherDeleteLink ms-3" href="#" data-teacherId="${result[i].teacherId}"> <i class="bi bi-trash-fill" style="font-size: 20px"></i></a> </td> </tr>\n`;
                  }
             display+='</table>';
             mainContent.innerHTML = display;
-            console.log(result);
+            
+            // searching
+            const searchBar=document.querySelector("#search");
+            searchBar.addEventListener("keyup",()=>{search(searchBar.value)});
             } catch (error) {
                 console.error(error.message);
             };
@@ -100,7 +106,8 @@ showStudents.addEventListener("click", async () =>
                 }
             
             const result = await response.json();
-            display = '<input id="search"  type="text" class="form-control mb-2" placeholder="ابحث">';
+            display = "<h4>الطلاب</h4>";
+            display += '<input id="search"  type="text" class="form-control mb-2" placeholder="ابحث">';
             display+='<table id="table" class="table table-striped table-hover w-100">\n<tr><th>م</th><th>الرقم القومي</th><th>الاسم</th><th>الصف</th><th>الفصل</th><th>العمليات</th></tr>';
             for (let i = 0; i < result.length; i++)
                  {
@@ -109,7 +116,7 @@ showStudents.addEventListener("click", async () =>
             display+='</table>';
             mainContent.innerHTML = display;
             const searchBar=document.querySelector("#search");
-            searchBar.addEventListener("keyup",search(searchBar.value));
+            searchBar.addEventListener("keyup",()=>{search(searchBar.value)});
 
             } catch (error) {
                 console.error(error.message);
@@ -300,30 +307,36 @@ mainContent.addEventListener("click",  (event) =>
 
 //functions
 
-function search(input) {
-  // Declare variables
-  let filter, table, tr, td, i, j, txtValue;
-  filter = input.value.toUpperCase();
-  table = document.querySelector("#table");
-  tr = table.getElementsByTagName("tr");
-
-  // Loop through all table rows, and hide those who don't match the search query
-  for (i = 0; i < tr.length; i++) 
+function search(input) 
     {
-        for(j=0; j<tr[i].getElementsByTagName("td").length; j++)
-            {
+        // Declare variables
+        let filter = input.toUpperCase();
+        const table = document.querySelector("#table");
+        let tr = table.getElementsByTagName("tr");
 
-            
-                td = tr[i].getElementsByTagName("td")[j];
-                if (td) {
-                  txtValue = td.textContent || td.innerText;
-                  if (txtValue.toUpperCase().indexOf(filter) > -1) {
-                    tr[i].style.display = "";
-                  } else {
-                    tr[i].style.display = "none";
+        // Loop through all table rows, and hide those who don't match the search query
+        for (let i = 0; i < tr.length; i++) 
+          {
+              for(let j=0; j<tr[i].getElementsByTagName("td").length; j++)
+                  {
+
+
+                      let td = tr[i].getElementsByTagName("td")[j];
+                      if (td) 
+                          {
+                              let txtValue = td.textContent || td.innerText;
+                              if (txtValue.toUpperCase().indexOf(filter) > -1) 
+                                  {
+                                    console.log("found");
+                                      tr[i].style.display = "";
+                                      break;
+                                  } 
+                              else 
+                                  {
+                                      tr[i].style.display = "none";
+                                  }
+                          }
                   }
-            }
-        }
+          }
     }
-}
 
