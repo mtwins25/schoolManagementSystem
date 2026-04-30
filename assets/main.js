@@ -275,7 +275,77 @@ showSubjects.addEventListener("click", async () =>
                 }
             
             const result = await response.json();
-            console.log(result);
+            // result display
+            //adding header
+            display = "<h4>المواد</h4>";
+            //adding search bar
+            display += '<input id="search" type="text" class="form-control mb-2" placeholder="ابحث">';
+            // adding table headers and then filling it with data
+            display+='<table id="table"  class="table table-striped table-hover w-100" >\n<tr><th>م</th><th>الاسم</th><th>العمليات</th></tr>';
+            for (let i = 0; i < result.length; i++)
+                 {
+                    display+=`<tr> <td>${i+1}</td>\n <td>${result[i].name}</td>\n <td><a class="subjectDetailsLink" href="#" data-subjectId="${result[i].id}"> <i class="bi bi-info-circle-fill"style="font-size: 20px"></i></a> <a class="subjectEditingLink ms-3" href="#" data-subjectId="${result[i].id}"><i class="bi bi-pen-fill" style="font-size: 20px"></i></a> <a class="subjectDeleteLink ms-3" href="#" data-subjectId="${result[i].id}"> <i class="bi bi-trash-fill" style="font-size: 20px"></i></a> </td> </tr>\n`;
+                 }
+            // closing table
+            display+='</table>';
+            // adding pagination elements
+            const totalPages = Math.ceil(result.length / 10); 
+             display+=`<div class="pagination" id="pagination">\n<a href="#" id="prev">السابق</a>`;
+            for (let i = 0; i < totalPages; i++)
+                {
+                    display+=`<a href="#" class="page-link" data-page="${i+1}">${i+1}</a>\n`;
+                }
+            display+=`<a href="#" id="next">التالي</a>\n</div>`;
+            mainContent.innerHTML = display;
+
+            // pagination
+            const pagination = document.getElementById('pagination'); 
+            const prevButton = document.getElementById('prev'); 
+            const nextButton = document.getElementById('next'); 
+            const pageLinks = document.querySelectorAll('.page-link'); 
+            // console.log(pageLinks);
+            let currentPage = 1;
+            // Event listener for "Previous" button 
+            prevButton.addEventListener('click', () => { 
+            	if (currentPage > 1) 
+                    { 
+            	    	currentPage--; 
+            	    	displayPage(currentPage); 
+            	    	updatePagination(pageLinks,currentPage); 
+            	    } 
+            }); 
+
+            // Event listener for "Next" button 
+            nextButton.addEventListener('click', () => { 
+            	if (currentPage < totalPages) 
+                    { 
+            	    	currentPage++; 
+            	    	displayPage(currentPage); 
+            	    	updatePagination(pageLinks,currentPage); 
+            	    } 
+            }); 
+
+            // Event listener for page number buttons 
+            pageLinks.forEach((link) => { 
+            	link.addEventListener('click', (e) => { 
+            		e.preventDefault(); 
+            		const page = parseInt(link.dataset.page); 
+            		if (page !== currentPage) 
+                        { 
+            		    	currentPage = page; 
+            		    	displayPage(currentPage); 
+            		    	updatePagination(pageLinks,currentPage); 
+            		    } 
+            	}); 
+            });
+            
+            // Initial page load 
+            displayPage(currentPage); 
+            updatePagination(pageLinks,currentPage);
+
+            // searching
+            const searchBar=document.querySelector("#search");
+            searchBar.addEventListener("keyup",()=>{search(searchBar.value,pageLinks,pagination)});
             } catch (error) {
                 console.error(error.message);
             };
@@ -315,7 +385,77 @@ showClassrooms.addEventListener("click", async () =>
                 }
             
             const result = await response.json();
-            console.log(result);
+            // result display
+            //adding header
+            display = "<h4>الفصول</h4>";
+            //adding search bar
+            display += '<input id="search" type="text" class="form-control mb-2" placeholder="ابحث">';
+            // adding table headers and then filling it with data
+            display+='<table id="table"  class="table table-striped table-hover w-100" >\n<tr><th>م</th><th>الاسم</th><th>الصف</th><th>المبنى</th><th>عدد الطلاب</th><th>العمليات</th></tr>';
+            for (let i = 0; i < result.length; i++)
+                 {
+                    display+=`<tr> <td>${i+1}</td>\n  <td>${result[i].classroomName}</td>\n <td><a class="gradeLink "href="#" data-grade="${result[i].grade}">${studentGrade.get(result[i].grade)}</a></td>\n <td><a class="buildingLink "href="#" data-buildingtId="${result[i].buildingId}">${result[i].buildingName}</a></td>\n <td>${result[i].boysNO+result[i].girlsNo}</td>\n <td><a class="classroomDetailsLink" href="#" data-classroomId="${result[i].classroomId}"> <i class="bi bi-info-circle-fill"style="font-size: 20px"></i></a> <a class="classroomEditingLink ms-3" href="#" data-classroomId="${result[i].classroomId}"><i class="bi bi-pen-fill" style="font-size: 20px"></i></a> <a class="classroomDeleteLink ms-3" href="#" data-classroomId="${result[i].classroomId}"> <i class="bi bi-trash-fill" style="font-size: 20px"></i></a> </td> </tr>\n`;
+                 }
+            // closing table
+            display+='</table>';
+            // adding pagination elements
+            const totalPages = Math.ceil(result.length / 10); 
+             display+=`<div class="pagination" id="pagination">\n<a href="#" id="prev">السابق</a>`;
+            for (let i = 0; i < totalPages; i++)
+                {
+                    display+=`<a href="#" class="page-link" data-page="${i+1}">${i+1}</a>\n`;
+                }
+            display+=`<a href="#" id="next">التالي</a>\n</div>`;
+            mainContent.innerHTML = display;
+
+            // pagination
+            const pagination = document.getElementById('pagination'); 
+            const prevButton = document.getElementById('prev'); 
+            const nextButton = document.getElementById('next'); 
+            const pageLinks = document.querySelectorAll('.page-link'); 
+            // console.log(pageLinks);
+            let currentPage = 1;
+            // Event listener for "Previous" button 
+            prevButton.addEventListener('click', () => { 
+            	if (currentPage > 1) 
+                    { 
+            	    	currentPage--; 
+            	    	displayPage(currentPage); 
+            	    	updatePagination(pageLinks,currentPage); 
+            	    } 
+            }); 
+
+            // Event listener for "Next" button 
+            nextButton.addEventListener('click', () => { 
+            	if (currentPage < totalPages) 
+                    { 
+            	    	currentPage++; 
+            	    	displayPage(currentPage); 
+            	    	updatePagination(pageLinks,currentPage); 
+            	    } 
+            }); 
+
+            // Event listener for page number buttons 
+            pageLinks.forEach((link) => { 
+            	link.addEventListener('click', (e) => { 
+            		e.preventDefault(); 
+            		const page = parseInt(link.dataset.page); 
+            		if (page !== currentPage) 
+                        { 
+            		    	currentPage = page; 
+            		    	displayPage(currentPage); 
+            		    	updatePagination(pageLinks,currentPage); 
+            		    } 
+            	}); 
+            });
+            
+            // Initial page load 
+            displayPage(currentPage); 
+            updatePagination(pageLinks,currentPage);
+
+            // searching
+            const searchBar=document.querySelector("#search");
+            searchBar.addEventListener("keyup",()=>{search(searchBar.value,pageLinks,pagination)});
             } catch (error) {
                 console.error(error.message);
             };
@@ -354,7 +494,77 @@ showBuildings.addEventListener("click", async () =>
                 }
             
             const result = await response.json();
-            console.log(result);
+            // result display
+            //adding header
+            display = "<h4>المباني</h4>";
+            //adding search bar
+            display += '<input id="search" type="text" class="form-control mb-2" placeholder="ابحث">';
+            // adding table headers and then filling it with data
+            display+='<table id="table"  class="table table-striped table-hover w-100" >\n<tr><th>م</th><th>الاسم</th><th>عدد الادوار</th><th>عدد الفصول</th><th>العمليات</th></tr>';
+            for (let i = 0; i < result.length; i++)
+                 {
+                    display+=`<tr> <td>${i+1}</td>\n <td>${result[i].name}</td>\n <td>${result[i].floorsNo}</td>\n <td>${result[i].classroomsNo}</td>\n <td><a class="buildingDetailsLink" href="#" data-buildingId="${result[i].id}"> <i class="bi bi-info-circle-fill" style="font-size: 20px"></i></a> <a class="buildingEditingLink ms-3" href="#" data-buildingId="${result[i].id}"><i class="bi bi-pen-fill" style="font-size: 20px"></i></a> <a class="buildingDeleteLink ms-3" href="#" data-buildingId="${result[i].id}"> <i class="bi bi-trash-fill" style="font-size: 20px"></i></a> </td> </tr>\n`;
+                 }
+            // closing table
+            display+='</table>';
+            // adding pagination elements
+            const totalPages = Math.ceil(result.length / 10); 
+             display+=`<div class="pagination" id="pagination">\n<a href="#" id="prev">السابق</a>`;
+            for (let i = 0; i < totalPages; i++)
+                {
+                    display+=`<a href="#" class="page-link" data-page="${i+1}">${i+1}</a>\n`;
+                }
+            display+=`<a href="#" id="next">التالي</a>\n</div>`;
+            mainContent.innerHTML = display;
+
+            // pagination
+            const pagination = document.getElementById('pagination'); 
+            const prevButton = document.getElementById('prev'); 
+            const nextButton = document.getElementById('next'); 
+            const pageLinks = document.querySelectorAll('.page-link'); 
+            // console.log(pageLinks);
+            let currentPage = 1;
+            // Event listener for "Previous" button 
+            prevButton.addEventListener('click', () => { 
+            	if (currentPage > 1) 
+                    { 
+            	    	currentPage--; 
+            	    	displayPage(currentPage); 
+            	    	updatePagination(pageLinks,currentPage); 
+            	    } 
+            }); 
+
+            // Event listener for "Next" button 
+            nextButton.addEventListener('click', () => { 
+            	if (currentPage < totalPages) 
+                    { 
+            	    	currentPage++; 
+            	    	displayPage(currentPage); 
+            	    	updatePagination(pageLinks,currentPage); 
+            	    } 
+            }); 
+
+            // Event listener for page number buttons 
+            pageLinks.forEach((link) => { 
+            	link.addEventListener('click', (e) => { 
+            		e.preventDefault(); 
+            		const page = parseInt(link.dataset.page); 
+            		if (page !== currentPage) 
+                        { 
+            		    	currentPage = page; 
+            		    	displayPage(currentPage); 
+            		    	updatePagination(pageLinks,currentPage); 
+            		    } 
+            	}); 
+            });
+            
+            // Initial page load 
+            displayPage(currentPage); 
+            updatePagination(pageLinks,currentPage);
+
+            // searching
+            const searchBar=document.querySelector("#search");
+            searchBar.addEventListener("keyup",()=>{search(searchBar.value,pageLinks,pagination)});
             } catch (error) {
                 console.error(error.message);
             };
@@ -386,6 +596,7 @@ addBuilding.addEventListener("click", async () =>
 // event delegation for dynamic content
 mainContent.addEventListener("click",  (event) =>
     {
+        //student links
         if (event.target.closest(".studentDetailsLink"))
             {
                 studentDetailsLink = event.target.closest(".studentDetailsLink");
@@ -406,6 +617,7 @@ mainContent.addEventListener("click",  (event) =>
                 classroomLink = event.target.closest(".classroomLink");
                 alert(classroomLink.dataset.classroomid);          
             }
+        //teacher links
         else if (event.target.closest(".teacherDetailsLink"))
             {
                 teacherDetailsLink = event.target.closest(".teacherDetailsLink");
@@ -421,6 +633,67 @@ mainContent.addEventListener("click",  (event) =>
                 teacherDeleteLink = event.target.closest(".teacherDeleteLink");
                 alert(teacherDeleteLink.dataset.teacherid);          
             }
+        else if (event.target.closest(".subjectLink"))
+            {
+                subjectLink = event.target.closest(".subjectLink");
+                alert(subjectLink.dataset.subjectid);          
+            }
+        //subject links
+        else if (event.target.closest(".subjectDetailsLink"))
+            {
+                subjectDetailsLink = event.target.closest(".subjectDetailsLink");
+                alert(subjectDetailsLink.dataset.subjectid);          
+            }
+        else if (event.target.closest(".subjectEditingLink"))
+            {
+                subjectEditingLink = event.target.closest(".subjectEditingLink");
+                alert(subjectEditingLink.dataset.subjectid);          
+            }
+        else if (event.target.closest(".subjectDeleteLink"))            {
+                subjectDeleteLink = event.target.closest(".subjectDeleteLink");
+                alert(subjectDeleteLink.dataset.subjectid);          
+            }
+        //classroom links
+        else if (event.target.closest(".classroomDetailsLink"))
+            {
+                classroomDetailsLink = event.target.closest(".classroomDetailsLink");
+                alert(classroomDetailsLink.dataset.classroomid);          
+            }
+        else if (event.target.closest(".classroomEditingLink"))
+            {
+                classroomEditingLink = event.target.closest(".classroomEditingLink");
+                alert(classroomEditingLink.dataset.classroomid);          
+            }
+        else if (event.target.closest(".classroomDeleteLink"))            {
+                classroomDeleteLink = event.target.closest(".classroomDeleteLink");
+                alert(classroomDeleteLink.dataset.classroomid);          
+            }
+        else if (event.target.closest(".buildingLink"))            {
+                buildingLink = event.target.closest(".buildingLink");
+                alert(buildingLink.dataset.buildingid);          
+            }
+        else if (event.target.closest(".gradeLink"))            {
+                gradeLink = event.target.closest(".gradeLink");
+                alert(gradeLink.dataset.grade);          
+            }
+        //building links
+        else if (event.target.closest(".buildingDetailsLink"))
+            {
+                buildingDetailsLink = event.target.closest(".buildingDetailsLink");
+                alert(buildingDetailsLink.dataset.buildingid);          
+            }
+        else if (event.target.closest(".buildingEditingLink"))
+            {
+                buildingEditingLink = event.target.closest(".buildingEditingLink");
+                alert(buildingEditingLink.dataset.buildingid);          
+            }
+        else if (event.target.closest(".buildingDeleteLink"))            {
+                buildingDeleteLink = event.target.closest(".buildingDeleteLink");
+                alert(buildingDeleteLink.dataset.buildingid);          
+            }
+        
+        
+        
         
     });
 

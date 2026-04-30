@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 27, 2026 at 02:45 PM
+-- Generation Time: Apr 30, 2026 at 04:18 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -31,14 +31,14 @@ CREATE TABLE `buildings` (
   `id` int(11) NOT NULL,
   `name` varchar(255) NOT NULL,
   `floorsNo` int(11) NOT NULL,
-  `classRoomsNo` int(11) NOT NULL
+  `classroomsNo` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `buildings`
 --
 
-INSERT INTO `buildings` (`id`, `name`, `floorsNo`, `classRoomsNo`) VALUES
+INSERT INTO `buildings` (`id`, `name`, `floorsNo`, `classroomsNo`) VALUES
 (1, 'Mahmoud', 3, 3),
 (2, 'Nowell', 2, 3),
 (3, 'Cassie', 1, 4);
