@@ -124,7 +124,7 @@ showTeachers.addEventListener("click", async () =>
 
             // searching
             const searchBar=document.querySelector("#search");
-            searchBar.addEventListener("keyup",()=>{search(searchBar.value,pageLinks)});
+            searchBar.addEventListener("keyup",()=>{search(searchBar.value,pageLinks,pagination)});
 
             } catch (error) {
                 console.error(error.message);
@@ -165,6 +165,7 @@ showStudents.addEventListener("click", async () =>
                 }
             
             const result = await response.json();
+            // result display
             //adding header
             display = "<h4>الطلاب</h4>";
             //adding search bar
@@ -175,10 +176,65 @@ showStudents.addEventListener("click", async () =>
                  {
                     display+=`<tr> <td>${i+1}</td>\n <td>${result[i].nId}</td>\n <td>${result[i].studentName}</td>\n <td>${studentGrade.get(result[i].grade)}</td>\n <td><a class="classroomLink "href="#" data-classroomId="${result[i].classroomId}">${result[i].classroomName}</a></td>\n <td><a class="studentDetailsLink" href="#" data-studentId="${result[i].studentId}"> <i class="bi bi-person-lines-fill" style="font-size: 20px"></i></a> <a class="studentEditingLink ms-3" href="#" data-studentId="${result[i].studentId}"><i class="bi bi-pen-fill" style="font-size: 20px"></i></a> <a class="studentDeleteLink ms-3" href="#" data-studentId="${result[i].studentId}"> <i class="bi bi-trash-fill" style="font-size: 20px"></i></a> </td> </tr>\n`;
                  }
+            // closing table
             display+='</table>';
+            // adding pagination elements
+            const totalPages = Math.ceil(result.length / 10); 
+             display+=`<div class="pagination" id="pagination">\n<a href="#" id="prev">السابق</a>`;
+            for (let i = 0; i < totalPages; i++)
+                {
+                    display+=`<a href="#" class="page-link" data-page="${i+1}">${i+1}</a>\n`;
+                }
+            display+=`<a href="#" id="next">التالي</a>\n</div>`;
             mainContent.innerHTML = display;
+             // pagination
+            const pagination = document.getElementById('pagination'); 
+            const prevButton = document.getElementById('prev'); 
+            const nextButton = document.getElementById('next'); 
+            const pageLinks = document.querySelectorAll('.page-link'); 
+            // console.log(pageLinks);
+            let currentPage = 1;
+            // Event listener for "Previous" button 
+            prevButton.addEventListener('click', () => { 
+            	if (currentPage > 1) 
+                    { 
+            	    	currentPage--; 
+            	    	displayPage(currentPage); 
+            	    	updatePagination(pageLinks,currentPage); 
+            	    } 
+            }); 
+
+            // Event listener for "Next" button 
+            nextButton.addEventListener('click', () => { 
+            	if (currentPage < totalPages) 
+                    { 
+            	    	currentPage++; 
+            	    	displayPage(currentPage); 
+            	    	updatePagination(pageLinks,currentPage); 
+            	    } 
+            }); 
+
+            // Event listener for page number buttons 
+            pageLinks.forEach((link) => { 
+            	link.addEventListener('click', (e) => { 
+            		e.preventDefault(); 
+            		const page = parseInt(link.dataset.page); 
+            		if (page !== currentPage) 
+                        { 
+            		    	currentPage = page; 
+            		    	displayPage(currentPage); 
+            		    	updatePagination(pageLinks,currentPage); 
+            		    } 
+            	}); 
+            });
+            
+            // Initial page load 
+            displayPage(currentPage); 
+            updatePagination(pageLinks,currentPage);
+
+            // searching
             const searchBar=document.querySelector("#search");
-            searchBar.addEventListener("keyup",()=>{search(searchBar.value)});
+            searchBar.addEventListener("keyup",()=>{search(searchBar.value,pageLinks,pagination)});
 
             } catch (error) {
                 console.error(error.message);
@@ -372,12 +428,14 @@ mainContent.addEventListener("click",  (event) =>
 //functions
 
 // searching function
-function search(input,pageLinks) 
+function search(input,pageLinks,pagination) 
     {
         // Declare variables
         let filter = input.toUpperCase();
         const table = document.querySelector("#table");
         let tr = table.getElementsByTagName("tr");
+        // to remove pagination buttons and numbers while searching and show all results
+        pagination.style.display = "none";
 
         // Loop through all table rows, and hide those who don't match the search query
         for (let i = 0; i < tr.length; i++) 
@@ -391,10 +449,11 @@ function search(input,pageLinks)
                           {
                             // to handle pagination correctly
                               let txtValue = td.textContent || td.innerText;
-                              if (txtValue.toUpperCase().indexOf(filter)=="")
+                              if (filter=="")
                                 {
                                     displayPage(1); 
                                     updatePagination(pageLinks,1);
+                                    pagination.style.display = "";
                                 }
                               else if (txtValue.toUpperCase().indexOf(filter) > -1) 
                                   {
@@ -410,6 +469,7 @@ function search(input,pageLinks)
                   }
           }
     }
+
 // pagination functions
 // Function to display rows for a specific page 
 function displayPage(page) 
