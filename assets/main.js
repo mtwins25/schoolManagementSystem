@@ -47,13 +47,10 @@ showTeachers.addEventListener("click", async () =>
         // fetching data
         const url = "teachers";
         try {
-            const response = await fetch(url);
-            if (!response.ok) 
-                {
-                    throw new Error(`Response status: ${response.status}`);
-                }
-            
-            const result = await response.json();
+
+            //sending request 
+            const result = await sendGetRequest(url);
+
             // result display
             //adding header
             display = "<h4>المدرسين</h4>";
@@ -84,20 +81,10 @@ addTeacher.addEventListener("click", async () =>
         let data;
         const url = "teachers";
         try {
-            const response = await fetch(url, 
-                {
-                    method: "POST",
-                    headers: 
-                        {
-                            "Content-Type": "application/json",
-                        },
-                    body: JSON.stringify(data),
-                });
-            if (!response.ok) 
-                {
-                    throw new Error(`Response status: ${response.status}`);
-                }
 
+            //sending request 
+            const result = await sendpostRequest(url,data);
+           
             } catch (error) {
                 console.error(error.message);
             };
@@ -107,13 +94,10 @@ showStudents.addEventListener("click", async () =>
     {
         const url = "students";
         try {
-            const response = await fetch(url);
-            if (!response.ok) 
-                {
-                    throw new Error(`Response status: ${response.status}`);
-                }
-            
-            const result = await response.json();
+
+            //sending request 
+            const result = await sendGetRequest(url);
+
             // result display
             //adding header
             display = "<h4>الطلاب</h4>";
@@ -144,19 +128,9 @@ addStudent.addEventListener("click", async () =>
         let data;
         const url = "students";
         try {
-            const response = await fetch(url, 
-                {
-                    method: "POST",
-                    headers: 
-                        {
-                            "Content-Type": "application/json",
-                        },
-                    body: JSON.stringify(data),
-                });
-            if (!response.ok) 
-                {
-                    throw new Error(`Response status: ${response.status}`);
-                }
+            
+            //sending request 
+            const result = await sendpostRequest(url,data);
 
             } catch (error) {
                 console.error(error.message);
@@ -167,13 +141,10 @@ showSubjects.addEventListener("click", async () =>
     {
         const url = "subjects";
         try {
-            const response = await fetch(url);
-            if (!response.ok) 
-                {
-                    throw new Error(`Response status: ${response.status}`);
-                }
             
-            const result = await response.json();
+            //sending request 
+            const result = await sendGetRequest(url);
+
             // result display
             //adding header
             display = "<h4>المواد</h4>";
@@ -204,19 +175,9 @@ addSubject.addEventListener("click", async () =>
         let data;
         const url = "subjects";
         try {
-            const response = await fetch(url, 
-                {
-                    method: "POST",
-                    headers: 
-                        {
-                            "Content-Type": "application/json",
-                        },
-                    body: JSON.stringify(data),
-                });
-            if (!response.ok) 
-                {
-                    throw new Error(`Response status: ${response.status}`);
-                }
+            
+            //sending request 
+            const result = await sendpostRequest(url,data);
 
             } catch (error) {
                 console.error(error.message);
@@ -227,13 +188,10 @@ showClassrooms.addEventListener("click", async () =>
     {
         const url = "classrooms";
         try {
-            const response = await fetch(url);
-            if (!response.ok) 
-                {
-                    throw new Error(`Response status: ${response.status}`);
-                }
             
-            const result = await response.json();
+            //sending request 
+            const result = await sendGetRequest(url);
+
             // result display
             //adding header
             display = "<h4>الفصول</h4>";
@@ -264,19 +222,10 @@ addClassroom.addEventListener("click", async () =>
         let data;
         const url = "classrooms";
         try {
-            const response = await fetch(url, 
-                {
-                    method: "POST",
-                    headers: 
-                        {
-                            "Content-Type": "application/json",
-                        },
-                    body: JSON.stringify(data),
-                });
-            if (!response.ok) 
-                {
-                    throw new Error(`Response status: ${response.status}`);
-                }
+            
+            //sending request 
+            const result = await sendpostRequest(url,data);
+
             } catch (error) {
                 console.error(error.message);
             };
@@ -286,13 +235,10 @@ showBuildings.addEventListener("click", async () =>
     {
         const url = "buildings";
         try {
-            const response = await fetch(url);
-            if (!response.ok) 
-                {
-                    throw new Error(`Response status: ${response.status}`);
-                }
             
-            const result = await response.json();
+            //sending request 
+            const result = await sendGetRequest(url);
+
             // result display
             //adding header
             display = "<h4>المباني</h4>";
@@ -313,7 +259,7 @@ showBuildings.addEventListener("click", async () =>
             // searching
             const searchBar=document.querySelector("#search");
             searchBar.addEventListener("keyup",()=>{search(searchBar.value,paginationResult.pageLinks,paginationResult.paginationContainer)});
-            
+
             } catch (error) {
                 console.error(error.message);
             };
@@ -323,19 +269,9 @@ addBuilding.addEventListener("click", async () =>
         let data;
         const url = "buildings";
         try {
-            const response = await fetch(url, 
-                {
-                    method: "POST",
-                    headers: 
-                        {
-                            "Content-Type": "application/json",
-                        },
-                    body: JSON.stringify(data),
-                });
-            if (!response.ok) 
-                {
-                    throw new Error(`Response status: ${response.status}`);
-                }
+           
+            //sending request 
+            const result = await sendpostRequest(url,data);
                 
             } catch (error) {
                 console.error(error.message);
@@ -448,8 +384,53 @@ mainContent.addEventListener("click",  (event) =>
 
 
 //functions
+// request functions
+async function sendGetRequest(url,method,data=null)
+    {
+            const response = await fetch(url);
+            if (!response.ok) 
+                {
+                    throw new Error(`Response status: ${response.status}`);
+                }
+            
+            const result = await response.json();
+            return result;
+    }
 
-// pagination function
+async function sendPostRequest(url,data)
+    {
+             const response = await fetch(url, 
+                {
+                    method: "POST",
+                    headers: 
+                        {
+                            "Content-Type": "application/json",
+                        },
+                    body: JSON.stringify(data),
+                });
+            if (!response.ok) 
+                {
+                    throw new Error(`Response status: ${response.status}`);
+                }
+            
+            const result = await response.json();
+            return result;
+    }
+
+// async function sendRequest(url,method,data=null)
+//     {
+//             const response = await fetch(url);
+//             if (!response.ok) 
+//                 {
+//                     throw new Error(`Response status: ${response.status}`);
+//                 }
+            
+//             const result = await response.json();
+//     }
+
+
+// pagination functions
+//pagination logic function
 function pagination(display,resultLength)
     {
         // adding pagination elements
@@ -508,6 +489,40 @@ function pagination(display,resultLength)
         return {pageLinks:pageLinks,paginationContainer:paginationContainer};
     }
 
+// Function to display rows for a specific page 
+function displayPage(page) 
+    { 
+    	const startIndex = (page - 1) * 10; 
+    	const endIndex = startIndex + 10; 
+        const table= document.querySelector('#table');
+        const trs= table.querySelectorAll('tr');
+
+        for (let i = 1; i < trs.length; i++) 
+            {
+   
+    		    if (i > startIndex && i <= endIndex) 
+                    { 
+    		    	    trs[i].style.display = ''; 
+    		        } 
+                else 
+                    { 
+    		    	trs[i].style.display = 'none'; 
+    		        } 
+            }
+                
+            
+    } 
+
+// Function to update pagination buttons and page numbers 
+function updatePagination(pageLinks,currentPage) 
+    { 
+     	pageLinks.forEach((link) => { 
+    		const page = parseInt(link.dataset.page); 
+    		link.classList.toggle('active', page === currentPage); 
+    	}); 
+    } 
+
+
 // searching function
 function search(input,pageLinks,pagination) 
     {
@@ -551,37 +566,4 @@ function search(input,pageLinks,pagination)
           }
     }
 
-// pagination functions
-// Function to display rows for a specific page 
-function displayPage(page) 
-    { 
-    	const startIndex = (page - 1) * 10; 
-    	const endIndex = startIndex + 10; 
-        const table= document.querySelector('#table');
-        const trs= table.querySelectorAll('tr');
-
-        for (let i = 1; i < trs.length; i++) 
-            {
-   
-    		    if (i > startIndex && i <= endIndex) 
-                    { 
-    		    	    trs[i].style.display = ''; 
-    		        } 
-                else 
-                    { 
-    		    	trs[i].style.display = 'none'; 
-    		        } 
-            }
-                
-            
-    } 
-
-// Function to update pagination buttons and page numbers 
-function updatePagination(pageLinks,currentPage) 
-    { 
-     	pageLinks.forEach((link) => { 
-    		const page = parseInt(link.dataset.page); 
-    		link.classList.toggle('active', page === currentPage); 
-    	}); 
-    } 
 
