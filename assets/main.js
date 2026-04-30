@@ -67,64 +67,13 @@ showTeachers.addEventListener("click", async () =>
                  }
             // closing table
             display+='</table>';
-            // adding pagination elements
-            const totalPages = Math.ceil(result.length / 10); 
-             display+=`<div class="pagination" id="pagination">\n<a href="#" id="prev">السابق</a>`;
-            for (let i = 0; i < totalPages; i++)
-                {
-                    display+=`<a href="#" class="page-link" data-page="${i+1}">${i+1}</a>\n`;
-                }
-            display+=`<a href="#" id="next">التالي</a>\n</div>`;
-            mainContent.innerHTML = display;
-
-            // pagination
-            const pagination = document.getElementById('pagination'); 
-            const prevButton = document.getElementById('prev'); 
-            const nextButton = document.getElementById('next'); 
-            const pageLinks = document.querySelectorAll('.page-link'); 
-            // console.log(pageLinks);
-            let currentPage = 1;
-            // Event listener for "Previous" button 
-            prevButton.addEventListener('click', () => { 
-            	if (currentPage > 1) 
-                    { 
-            	    	currentPage--; 
-            	    	displayPage(currentPage); 
-            	    	updatePagination(pageLinks,currentPage); 
-            	    } 
-            }); 
-
-            // Event listener for "Next" button 
-            nextButton.addEventListener('click', () => { 
-            	if (currentPage < totalPages) 
-                    { 
-            	    	currentPage++; 
-            	    	displayPage(currentPage); 
-            	    	updatePagination(pageLinks,currentPage); 
-            	    } 
-            }); 
-
-            // Event listener for page number buttons 
-            pageLinks.forEach((link) => { 
-            	link.addEventListener('click', (e) => { 
-            		e.preventDefault(); 
-            		const page = parseInt(link.dataset.page); 
-            		if (page !== currentPage) 
-                        { 
-            		    	currentPage = page; 
-            		    	displayPage(currentPage); 
-            		    	updatePagination(pageLinks,currentPage); 
-            		    } 
-            	}); 
-            });
             
-            // Initial page load 
-            displayPage(currentPage); 
-            updatePagination(pageLinks,currentPage);
+            //pagination
+            paginationResult=pagination(display,result.length);
 
             // searching
             const searchBar=document.querySelector("#search");
-            searchBar.addEventListener("keyup",()=>{search(searchBar.value,pageLinks,pagination)});
+            searchBar.addEventListener("keyup",()=>{search(searchBar.value,paginationResult.pageLinks,paginationResult.paginationContainer)});
 
             } catch (error) {
                 console.error(error.message);
@@ -178,63 +127,13 @@ showStudents.addEventListener("click", async () =>
                  }
             // closing table
             display+='</table>';
-            // adding pagination elements
-            const totalPages = Math.ceil(result.length / 10); 
-             display+=`<div class="pagination" id="pagination">\n<a href="#" id="prev">السابق</a>`;
-            for (let i = 0; i < totalPages; i++)
-                {
-                    display+=`<a href="#" class="page-link" data-page="${i+1}">${i+1}</a>\n`;
-                }
-            display+=`<a href="#" id="next">التالي</a>\n</div>`;
-            mainContent.innerHTML = display;
-             // pagination
-            const pagination = document.getElementById('pagination'); 
-            const prevButton = document.getElementById('prev'); 
-            const nextButton = document.getElementById('next'); 
-            const pageLinks = document.querySelectorAll('.page-link'); 
-            // console.log(pageLinks);
-            let currentPage = 1;
-            // Event listener for "Previous" button 
-            prevButton.addEventListener('click', () => { 
-            	if (currentPage > 1) 
-                    { 
-            	    	currentPage--; 
-            	    	displayPage(currentPage); 
-            	    	updatePagination(pageLinks,currentPage); 
-            	    } 
-            }); 
 
-            // Event listener for "Next" button 
-            nextButton.addEventListener('click', () => { 
-            	if (currentPage < totalPages) 
-                    { 
-            	    	currentPage++; 
-            	    	displayPage(currentPage); 
-            	    	updatePagination(pageLinks,currentPage); 
-            	    } 
-            }); 
-
-            // Event listener for page number buttons 
-            pageLinks.forEach((link) => { 
-            	link.addEventListener('click', (e) => { 
-            		e.preventDefault(); 
-            		const page = parseInt(link.dataset.page); 
-            		if (page !== currentPage) 
-                        { 
-            		    	currentPage = page; 
-            		    	displayPage(currentPage); 
-            		    	updatePagination(pageLinks,currentPage); 
-            		    } 
-            	}); 
-            });
-            
-            // Initial page load 
-            displayPage(currentPage); 
-            updatePagination(pageLinks,currentPage);
+            //pagination
+            paginationResult=pagination(display,result.length);
 
             // searching
             const searchBar=document.querySelector("#search");
-            searchBar.addEventListener("keyup",()=>{search(searchBar.value,pageLinks,pagination)});
+            searchBar.addEventListener("keyup",()=>{search(searchBar.value,paginationResult.pageLinks,paginationResult.paginationContainer)});
 
             } catch (error) {
                 console.error(error.message);
@@ -288,64 +187,13 @@ showSubjects.addEventListener("click", async () =>
                  }
             // closing table
             display+='</table>';
-            // adding pagination elements
-            const totalPages = Math.ceil(result.length / 10); 
-             display+=`<div class="pagination" id="pagination">\n<a href="#" id="prev">السابق</a>`;
-            for (let i = 0; i < totalPages; i++)
-                {
-                    display+=`<a href="#" class="page-link" data-page="${i+1}">${i+1}</a>\n`;
-                }
-            display+=`<a href="#" id="next">التالي</a>\n</div>`;
-            mainContent.innerHTML = display;
 
-            // pagination
-            const pagination = document.getElementById('pagination'); 
-            const prevButton = document.getElementById('prev'); 
-            const nextButton = document.getElementById('next'); 
-            const pageLinks = document.querySelectorAll('.page-link'); 
-            // console.log(pageLinks);
-            let currentPage = 1;
-            // Event listener for "Previous" button 
-            prevButton.addEventListener('click', () => { 
-            	if (currentPage > 1) 
-                    { 
-            	    	currentPage--; 
-            	    	displayPage(currentPage); 
-            	    	updatePagination(pageLinks,currentPage); 
-            	    } 
-            }); 
-
-            // Event listener for "Next" button 
-            nextButton.addEventListener('click', () => { 
-            	if (currentPage < totalPages) 
-                    { 
-            	    	currentPage++; 
-            	    	displayPage(currentPage); 
-            	    	updatePagination(pageLinks,currentPage); 
-            	    } 
-            }); 
-
-            // Event listener for page number buttons 
-            pageLinks.forEach((link) => { 
-            	link.addEventListener('click', (e) => { 
-            		e.preventDefault(); 
-            		const page = parseInt(link.dataset.page); 
-            		if (page !== currentPage) 
-                        { 
-            		    	currentPage = page; 
-            		    	displayPage(currentPage); 
-            		    	updatePagination(pageLinks,currentPage); 
-            		    } 
-            	}); 
-            });
-            
-            // Initial page load 
-            displayPage(currentPage); 
-            updatePagination(pageLinks,currentPage);
+            //pagination
+            paginationResult=pagination(display,result.length);
 
             // searching
             const searchBar=document.querySelector("#search");
-            searchBar.addEventListener("keyup",()=>{search(searchBar.value,pageLinks,pagination)});
+            searchBar.addEventListener("keyup",()=>{search(searchBar.value,paginationResult.pageLinks,paginationResult.paginationContainer)});
             } catch (error) {
                 console.error(error.message);
             };
@@ -398,64 +246,13 @@ showClassrooms.addEventListener("click", async () =>
                  }
             // closing table
             display+='</table>';
-            // adding pagination elements
-            const totalPages = Math.ceil(result.length / 10); 
-             display+=`<div class="pagination" id="pagination">\n<a href="#" id="prev">السابق</a>`;
-            for (let i = 0; i < totalPages; i++)
-                {
-                    display+=`<a href="#" class="page-link" data-page="${i+1}">${i+1}</a>\n`;
-                }
-            display+=`<a href="#" id="next">التالي</a>\n</div>`;
-            mainContent.innerHTML = display;
 
-            // pagination
-            const pagination = document.getElementById('pagination'); 
-            const prevButton = document.getElementById('prev'); 
-            const nextButton = document.getElementById('next'); 
-            const pageLinks = document.querySelectorAll('.page-link'); 
-            // console.log(pageLinks);
-            let currentPage = 1;
-            // Event listener for "Previous" button 
-            prevButton.addEventListener('click', () => { 
-            	if (currentPage > 1) 
-                    { 
-            	    	currentPage--; 
-            	    	displayPage(currentPage); 
-            	    	updatePagination(pageLinks,currentPage); 
-            	    } 
-            }); 
-
-            // Event listener for "Next" button 
-            nextButton.addEventListener('click', () => { 
-            	if (currentPage < totalPages) 
-                    { 
-            	    	currentPage++; 
-            	    	displayPage(currentPage); 
-            	    	updatePagination(pageLinks,currentPage); 
-            	    } 
-            }); 
-
-            // Event listener for page number buttons 
-            pageLinks.forEach((link) => { 
-            	link.addEventListener('click', (e) => { 
-            		e.preventDefault(); 
-            		const page = parseInt(link.dataset.page); 
-            		if (page !== currentPage) 
-                        { 
-            		    	currentPage = page; 
-            		    	displayPage(currentPage); 
-            		    	updatePagination(pageLinks,currentPage); 
-            		    } 
-            	}); 
-            });
-            
-            // Initial page load 
-            displayPage(currentPage); 
-            updatePagination(pageLinks,currentPage);
+            //pagination
+            paginationResult=pagination(display,result.length);
 
             // searching
             const searchBar=document.querySelector("#search");
-            searchBar.addEventListener("keyup",()=>{search(searchBar.value,pageLinks,pagination)});
+            searchBar.addEventListener("keyup",()=>{search(searchBar.value,paginationResult.pageLinks,paginationResult.paginationContainer)});
             } catch (error) {
                 console.error(error.message);
             };
@@ -507,64 +304,13 @@ showBuildings.addEventListener("click", async () =>
                  }
             // closing table
             display+='</table>';
-            // adding pagination elements
-            const totalPages = Math.ceil(result.length / 10); 
-             display+=`<div class="pagination" id="pagination">\n<a href="#" id="prev">السابق</a>`;
-            for (let i = 0; i < totalPages; i++)
-                {
-                    display+=`<a href="#" class="page-link" data-page="${i+1}">${i+1}</a>\n`;
-                }
-            display+=`<a href="#" id="next">التالي</a>\n</div>`;
-            mainContent.innerHTML = display;
 
-            // pagination
-            const pagination = document.getElementById('pagination'); 
-            const prevButton = document.getElementById('prev'); 
-            const nextButton = document.getElementById('next'); 
-            const pageLinks = document.querySelectorAll('.page-link'); 
-            // console.log(pageLinks);
-            let currentPage = 1;
-            // Event listener for "Previous" button 
-            prevButton.addEventListener('click', () => { 
-            	if (currentPage > 1) 
-                    { 
-            	    	currentPage--; 
-            	    	displayPage(currentPage); 
-            	    	updatePagination(pageLinks,currentPage); 
-            	    } 
-            }); 
-
-            // Event listener for "Next" button 
-            nextButton.addEventListener('click', () => { 
-            	if (currentPage < totalPages) 
-                    { 
-            	    	currentPage++; 
-            	    	displayPage(currentPage); 
-            	    	updatePagination(pageLinks,currentPage); 
-            	    } 
-            }); 
-
-            // Event listener for page number buttons 
-            pageLinks.forEach((link) => { 
-            	link.addEventListener('click', (e) => { 
-            		e.preventDefault(); 
-            		const page = parseInt(link.dataset.page); 
-            		if (page !== currentPage) 
-                        { 
-            		    	currentPage = page; 
-            		    	displayPage(currentPage); 
-            		    	updatePagination(pageLinks,currentPage); 
-            		    } 
-            	}); 
-            });
-            
-            // Initial page load 
-            displayPage(currentPage); 
-            updatePagination(pageLinks,currentPage);
+            //pagination
+            paginationResult=pagination(display,result.length);
 
             // searching
             const searchBar=document.querySelector("#search");
-            searchBar.addEventListener("keyup",()=>{search(searchBar.value,pageLinks,pagination)});
+            searchBar.addEventListener("keyup",()=>{search(searchBar.value,paginationResult.pageLinks,paginationResult.paginationContainer)});
             } catch (error) {
                 console.error(error.message);
             };
@@ -699,6 +445,65 @@ mainContent.addEventListener("click",  (event) =>
 
 
 //functions
+
+// pagination function
+function pagination(display,resultLength)
+    {
+        // adding pagination elements
+        const totalPages = Math.ceil(resultLength / 10); 
+         display+=`<div class="pagination" id="pagination">\n<a href="#" id="prev">السابق</a>`;
+        for (let i = 0; i < totalPages; i++)
+            {
+                display+=`<a href="#" class="page-link" data-page="${i+1}">${i+1}</a>\n`;
+            }
+        display+=`<a href="#" id="next">التالي</a>\n</div>`;
+
+        //displaying content
+        mainContent.innerHTML = display;
+        // pagination
+        const paginationContainer = document.getElementById('pagination'); 
+        const prevButton = document.getElementById('prev'); 
+        const nextButton = document.getElementById('next'); 
+        const pageLinks = document.querySelectorAll('.page-link'); 
+        // console.log(pageLinks);
+        let currentPage = 1;
+        // Event listener for "Previous" button 
+        prevButton.addEventListener('click', () => { 
+        	if (currentPage > 1) 
+                { 
+        	    	currentPage--; 
+        	    	displayPage(currentPage); 
+        	    	updatePagination(pageLinks,currentPage); 
+        	    } 
+        }); 
+        // Event listener for "Next" button 
+        nextButton.addEventListener('click', () => { 
+        	if (currentPage < totalPages) 
+                { 
+        	    	currentPage++; 
+        	    	displayPage(currentPage); 
+        	    	updatePagination(pageLinks,currentPage); 
+        	    } 
+        }); 
+        // Event listener for page number buttons 
+        pageLinks.forEach((link) => { 
+        	link.addEventListener('click', (e) => { 
+        		e.preventDefault(); 
+        		const page = parseInt(link.dataset.page); 
+        		if (page !== currentPage) 
+                    { 
+        		    	currentPage = page; 
+        		    	displayPage(currentPage); 
+        		    	updatePagination(pageLinks,currentPage); 
+        		    } 
+        	}); 
+        });
+        
+        // Initial page load 
+        displayPage(currentPage); 
+        updatePagination(pageLinks,currentPage);
+        return {pageLinks:pageLinks,paginationContainer:paginationContainer};
+    }
 
 // searching function
 function search(input,pageLinks,pagination) 
