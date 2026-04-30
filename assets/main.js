@@ -194,6 +194,7 @@ showSubjects.addEventListener("click", async () =>
             // searching
             const searchBar=document.querySelector("#search");
             searchBar.addEventListener("keyup",()=>{search(searchBar.value,paginationResult.pageLinks,paginationResult.paginationContainer)});
+
             } catch (error) {
                 console.error(error.message);
             };
@@ -253,6 +254,7 @@ showClassrooms.addEventListener("click", async () =>
             // searching
             const searchBar=document.querySelector("#search");
             searchBar.addEventListener("keyup",()=>{search(searchBar.value,paginationResult.pageLinks,paginationResult.paginationContainer)});
+
             } catch (error) {
                 console.error(error.message);
             };
@@ -311,6 +313,7 @@ showBuildings.addEventListener("click", async () =>
             // searching
             const searchBar=document.querySelector("#search");
             searchBar.addEventListener("keyup",()=>{search(searchBar.value,paginationResult.pageLinks,paginationResult.paginationContainer)});
+            
             } catch (error) {
                 console.error(error.message);
             };
