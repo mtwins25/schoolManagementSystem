@@ -68,11 +68,11 @@ showTeachers.addEventListener("click", async () =>
             mainContent.innerHTML = display;
             
             //pagination
-            paginationResult=paginationFunction(result.length);
+            paginationFunction(result.length);
 
             // searching
             const searchBar=document.querySelector("#search");
-            searchBar.addEventListener("keyup",()=>{search(searchBar.value,paginationResult.pageLinks,paginationResult.paginationContainer)});
+            searchBar.addEventListener("keyup",()=>{search(searchBar.value)});
 
             } catch (error) {
                 console.error(error.message);
@@ -117,11 +117,11 @@ showStudents.addEventListener("click", async () =>
             mainContent.innerHTML = display;
 
             //pagination
-            paginationResult=paginationFunction(result.length);
+            paginationFunction(result.length);
 
             // searching
             const searchBar=document.querySelector("#search");
-            searchBar.addEventListener("keyup",()=>{search(searchBar.value,paginationResult.pageLinks,paginationResult.paginationContainer)});
+            searchBar.addEventListener("keyup",()=>{search(searchBar.value)});
 
             } catch (error) {
                 console.error(error.message);
@@ -166,11 +166,11 @@ showSubjects.addEventListener("click", async () =>
             mainContent.innerHTML = display;
 
             //pagination
-            paginationResult=paginationFunction(result.length);
+            paginationFunction(result.length);
 
             // searching
             const searchBar=document.querySelector("#search");
-            searchBar.addEventListener("keyup",()=>{search(searchBar.value,paginationResult.pageLinks,paginationResult.paginationContainer)});
+            searchBar.addEventListener("keyup",()=>{search(searchBar.value)});
 
             } catch (error) {
                 console.error(error.message);
@@ -215,11 +215,11 @@ showClassrooms.addEventListener("click", async () =>
             mainContent.innerHTML = display;
 
             //pagination
-            paginationResult=paginationFunction(result.length);
+            paginationFunction(result.length);
 
             // searching
             const searchBar=document.querySelector("#search");
-            searchBar.addEventListener("keyup",()=>{search(searchBar.value,paginationResult.pageLinks,paginationResult.paginationContainer)});
+            searchBar.addEventListener("keyup",()=>{search(searchBar.value)});
 
             } catch (error) {
                 console.error(error.message);
@@ -264,11 +264,11 @@ showBuildings.addEventListener("click", async () =>
             mainContent.innerHTML = display;
 
             //pagination
-            paginationResult=paginationFunction(result.length);
+            paginationFunction(result.length);
 
             // searching
             const searchBar=document.querySelector("#search");
-            searchBar.addEventListener("keyup",()=>{search(searchBar.value,paginationResult.pageLinks,paginationResult.paginationContainer)});
+            searchBar.addEventListener("keyup",()=>{search(searchBar.value)});
 
             } catch (error) {
                 console.error(error.message);
@@ -295,7 +295,7 @@ mainContent.addEventListener("click",  (event) =>
   
         if (event.target.closest(".detailsLink"))
             {
-                detailsLink = event.target.closest(".detailsLink");
+                const detailsLink = event.target.closest(".detailsLink");
 
                 if(detailsLink.dataset.teacherid)
                     {
@@ -321,7 +321,7 @@ mainContent.addEventListener("click",  (event) =>
             }
         if (event.target.closest(".editingLink"))
             {
-                editingLink = event.target.closest(".editingLink");
+                const editingLink = event.target.closest(".editingLink");
 
                 if(editingLink.dataset.teacherid)
                     {
@@ -347,7 +347,8 @@ mainContent.addEventListener("click",  (event) =>
             }
         if (event.target.closest(".deleteLink"))
             {
-                deleteLink = event.target.closest(".deleteLink");
+                const deleteLink = event.target.closest(".deleteLink");
+                const row = deleteLink.parentElement.parentElement;
 
                 if(deleteLink.dataset.teacherid)
                     {
@@ -369,29 +370,40 @@ mainContent.addEventListener("click",  (event) =>
                     {
                         alert(deleteLink.dataset.buildingid);
                     }
+                row.remove();
+                const paginationContainer = document.querySelector('#pagination');
+                paginationContainer.remove();
+                const table = document.querySelector("#table");
+                let trs = table.querySelectorAll("tr");
+
+                for (let i = 1; i < trs.length; i++)
+                    {
+                        trs[i].querySelectorAll("td")[0].innerHTML = i;
+                    }
+                paginationFunction(trs.length-1);
     
             }
         //student links
         else if (event.target.closest(".classroomLink"))
             {  
-                classroomLink = event.target.closest(".classroomLink");
+                const classroomLink = event.target.closest(".classroomLink");
                 alert(classroomLink.dataset.classroomid);          
             }
 
         //teacher links
         else if (event.target.closest(".subjectLink"))
             {
-                subjectLink = event.target.closest(".subjectLink");
+                const subjectLink = event.target.closest(".subjectLink");
                 alert(subjectLink.dataset.subjectid);          
             }
 
         //classroom links
         else if (event.target.closest(".buildingLink"))            {
-                buildingLink = event.target.closest(".buildingLink");
+                const buildingLink = event.target.closest(".buildingLink");
                 alert(buildingLink.dataset.buildingid);          
             }
         else if (event.target.closest(".gradeLink"))            {
-                gradeLink = event.target.closest(".gradeLink");
+                const gradeLink = event.target.closest(".gradeLink");
                 alert(gradeLink.dataset.grade);          
             }
         
@@ -455,21 +467,20 @@ function paginationFunction(resultLength)
     {
         // adding pagination elements
         const totalPages = Math.ceil(resultLength / 10); 
-         paginationElements=`<div class="pagination" id="pagination">\n<a href="#" id="prev">السابق</a>\n`;
+        let paginationElements=`<div class="pagination" id="pagination">\n<a href="#" id="prev">السابق</a>\n`;
         for (let i = 0; i < totalPages; i++)
             {
                 paginationElements+=`<a href="#" class="page-link" data-page="${i+1}">${i+1}</a>\n`;
             }
         paginationElements+=`<a href="#" id="next">التالي</a>\n</div>`;
-        console.log(paginationElements);
 
         //adding pagination to main content
         // mainContent.insertAdjacentHTML("beforeend",pagination);
         mainContent.innerHTML += paginationElements;
         // pagination
-        const paginationContainer = document.getElementById('pagination'); 
-        const prevButton = document.getElementById('prev'); 
-        const nextButton = document.getElementById('next'); 
+        const paginationContainer = document.querySelector('#pagination'); 
+        const prevButton = document.querySelector('#prev'); 
+        const nextButton = document.querySelector('#next'); 
         const pageLinks = document.querySelectorAll('.page-link'); 
         // console.log(pageLinks);
         let currentPage = 1;
@@ -508,7 +519,6 @@ function paginationFunction(resultLength)
         // Initial page load 
         displayPage(currentPage); 
         updatePagination(pageLinks,currentPage);
-        return {pageLinks:pageLinks,paginationContainer:paginationContainer};
     }
 
 // Function to display rows for a specific page 
@@ -546,23 +556,25 @@ function updatePagination(pageLinks,currentPage)
 
 
 // searching function
-function search(input,pageLinks,pagination) 
+function search(input) 
     {
         // Declare variables
         let filter = input.toUpperCase();
         const table = document.querySelector("#table");
-        let tr = table.getElementsByTagName("tr");
+        let trs = table.querySelectorAll("tr");
+        //get pagination elements
+        const paginationContainer = document.querySelector('#pagination');
+        const pageLinks = document.querySelectorAll('.page-link');
         // to remove pagination buttons and numbers while searching and show all results
-        pagination.style.display = "none";
+        paginationContainer.style.display = "none";
 
         // Loop through all table rows, and hide those who don't match the search query
-        for (let i = 0; i < tr.length; i++) 
+        for (let i = 0; i < trs.length; i++) 
           {
-              for(let j=0; j<tr[i].getElementsByTagName("td").length; j++)
+              for(let j=0; j<trs[i].querySelectorAll("td").length; j++)
                   {
 
-
-                      let td = tr[i].getElementsByTagName("td")[j];
+                      let td = trs[i].querySelectorAll("td")[j];
                       if (td) 
                           {
                             // to handle pagination correctly
@@ -571,17 +583,17 @@ function search(input,pageLinks,pagination)
                                 {
                                     displayPage(1); 
                                     updatePagination(pageLinks,1);
-                                    pagination.style.display = "";
+                                    paginationContainer.style.display = "";
                                 }
                               else if (txtValue.toUpperCase().indexOf(filter) > -1) 
                                   {
                                     console.log("found");
-                                      tr[i].style.display = "";
+                                      trs[i].style.display = "";
                                       break;
                                   } 
                               else 
                                   {
-                                      tr[i].style.display = "none";
+                                      trs[i].style.display = "none";
                                   }
                           }
                   }
