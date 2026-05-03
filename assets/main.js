@@ -381,6 +381,9 @@ mainContent.addEventListener("click",  (event) =>
                         trs[i].querySelectorAll("td")[0].innerHTML = i;
                     }
                 paginationFunction(trs.length-1);
+                // searching
+                const searchBar=document.querySelector("#search");
+                searchBar.addEventListener("keyup",()=>{search(searchBar.value)});
     
             }
         //student links
