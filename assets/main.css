@@ -12,7 +12,7 @@ a:hover
         color: #B99557!important;
         text-decoration: none;
     }
-a.teacherDeleteLink:hover,a.buildingDeleteLink:hover,a.studentDeleteLink:hover,a.subjectDeleteLink:hover,a.classDeleteLink:hover
+a.deleteLink:hover
     {
         color: #f80404!important;
         text-decoration: none;
@@ -38,12 +38,15 @@ td
         color: #14436F !important;
     }
 
-
+#mainContent .pagination
+    {
+       justify-content: center;
+    }
 
 .pagination {
     text-align: center;
     margin-top: 2rem;
-    margin-right: 35%;
+    /* margin-right: 35%; */
     margin-bottom: 2rem;
 }
 

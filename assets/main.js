@@ -49,7 +49,7 @@ showTeachers.addEventListener("click", async () =>
         try {
 
             //sending request 
-            const result = await sendGetRequest(url);
+            const result = await sendNoBodyRequest(url,"GET");
 
             // result display
             //adding header
@@ -60,13 +60,15 @@ showTeachers.addEventListener("click", async () =>
             display+='<table id="table"  class="table table-striped table-hover w-100" >\n<tr><th>م</th><th>الرقم القومي</th><th>الاسم</th><th>رقم الهاتف</th><th>المرتبة</th><th>المادة</th><th>العمليات</th></tr>';
             for (let i = 0; i < result.length; i++)
                  {
-                    display+=`<tr> <td>${i+1}</td>\n <td>${result[i].nId}</td>\n <td>${result[i].teacherName}</td>\n <td>${result[i].phoneNo}</td>\n <td>${result[i].rank}</td>\n <td><a class="subjectLink "href="#" data-subjectId="${result[i].subjectId}">${result[i].subjectName}</a></td>\n <td><a class="teacherDetailsLink" href="#" data-teacherId="${result[i].teacherId}"> <i class="bi bi-person-lines-fill" style="font-size: 20px"></i></a> <a class="teacherEditingLink ms-3" href="#" data-teacherId="${result[i].teacherId}"><i class="bi bi-pen-fill" style="font-size: 20px"></i></a> <a class="teacherDeleteLink ms-3" href="#" data-teacherId="${result[i].teacherId}"> <i class="bi bi-trash-fill" style="font-size: 20px"></i></a> </td> </tr>\n`;
+                    display+=`<tr> <td>${i+1}</td>\n <td>${result[i].nId}</td>\n <td>${result[i].teacherName}</td>\n <td>${result[i].phoneNo}</td>\n <td>${result[i].rank}</td>\n <td><a class="subjectLink "href="#" data-subjectId="${result[i].subjectId}">${result[i].subjectName}</a></td>\n <td><a class="detailsLink" href="#" data-teacherId="${result[i].teacherId}"> <i class="bi bi-person-lines-fill" style="font-size: 20px"></i></a> <a class="editingLink ms-3" href="#" data-teacherId="${result[i].teacherId}"><i class="bi bi-pen-fill" style="font-size: 20px"></i></a> <a class="deleteLink ms-3" href="#" data-teacherId="${result[i].teacherId}"> <i class="bi bi-trash-fill" style="font-size: 20px"></i></a> </td> </tr>\n`;
                  }
             // closing table
             display+='</table>';
+            // displaying content
+            mainContent.innerHTML = display;
             
             //pagination
-            paginationResult=pagination(display,result.length);
+            paginationResult=paginationFunction(result.length);
 
             // searching
             const searchBar=document.querySelector("#search");
@@ -96,7 +98,7 @@ showStudents.addEventListener("click", async () =>
         try {
 
             //sending request 
-            const result = await sendGetRequest(url);
+            const result = await sendNoBodyRequest(url,"GET");
 
             // result display
             //adding header
@@ -107,13 +109,15 @@ showStudents.addEventListener("click", async () =>
             display+='<table id="table" class="table table-striped table-hover w-100">\n<tr><th>م</th><th>الرقم القومي</th><th>الاسم</th><th>الصف</th><th>الفصل</th><th>العمليات</th></tr>';
             for (let i = 0; i < result.length; i++)
                  {
-                    display+=`<tr> <td>${i+1}</td>\n <td>${result[i].nId}</td>\n <td>${result[i].studentName}</td>\n <td>${studentGrade.get(result[i].grade)}</td>\n <td><a class="classroomLink "href="#" data-classroomId="${result[i].classroomId}">${result[i].classroomName}</a></td>\n <td><a class="studentDetailsLink" href="#" data-studentId="${result[i].studentId}"> <i class="bi bi-person-lines-fill" style="font-size: 20px"></i></a> <a class="studentEditingLink ms-3" href="#" data-studentId="${result[i].studentId}"><i class="bi bi-pen-fill" style="font-size: 20px"></i></a> <a class="studentDeleteLink ms-3" href="#" data-studentId="${result[i].studentId}"> <i class="bi bi-trash-fill" style="font-size: 20px"></i></a> </td> </tr>\n`;
+                    display+=`<tr> <td>${i+1}</td>\n <td>${result[i].nId}</td>\n <td>${result[i].studentName}</td>\n <td>${studentGrade.get(result[i].grade)}</td>\n <td><a class="classroomLink "href="#" data-classroomId="${result[i].classroomId}">${result[i].classroomName}</a></td>\n <td><a class="detailsLink" href="#" data-studentId="${result[i].studentId}"> <i class="bi bi-person-lines-fill" style="font-size: 20px"></i></a> <a class="editingLink ms-3" href="#" data-studentId="${result[i].studentId}"><i class="bi bi-pen-fill" style="font-size: 20px"></i></a> <a class="deleteLink ms-3" href="#" data-studentId="${result[i].studentId}"> <i class="bi bi-trash-fill" style="font-size: 20px"></i></a> </td> </tr>\n`;
                  }
             // closing table
             display+='</table>';
+            // displaying content
+            mainContent.innerHTML = display;
 
             //pagination
-            paginationResult=pagination(display,result.length);
+            paginationResult=paginationFunction(result.length);
 
             // searching
             const searchBar=document.querySelector("#search");
@@ -143,7 +147,7 @@ showSubjects.addEventListener("click", async () =>
         try {
             
             //sending request 
-            const result = await sendGetRequest(url);
+            const result = await sendNoBodyRequest(url,"GET");
 
             // result display
             //adding header
@@ -154,13 +158,15 @@ showSubjects.addEventListener("click", async () =>
             display+='<table id="table"  class="table table-striped table-hover w-100" >\n<tr><th>م</th><th>الاسم</th><th>العمليات</th></tr>';
             for (let i = 0; i < result.length; i++)
                  {
-                    display+=`<tr> <td>${i+1}</td>\n <td>${result[i].name}</td>\n <td><a class="subjectDetailsLink" href="#" data-subjectId="${result[i].id}"> <i class="bi bi-info-circle-fill"style="font-size: 20px"></i></a> <a class="subjectEditingLink ms-3" href="#" data-subjectId="${result[i].id}"><i class="bi bi-pen-fill" style="font-size: 20px"></i></a> <a class="subjectDeleteLink ms-3" href="#" data-subjectId="${result[i].id}"> <i class="bi bi-trash-fill" style="font-size: 20px"></i></a> </td> </tr>\n`;
+                    display+=`<tr> <td>${i+1}</td>\n <td>${result[i].name}</td>\n <td><a class="detailsLink" href="#" data-subjectId="${result[i].id}"> <i class="bi bi-info-circle-fill"style="font-size: 20px"></i></a> <a class="editingLink ms-3" href="#" data-subjectId="${result[i].id}"><i class="bi bi-pen-fill" style="font-size: 20px"></i></a> <a class="deleteLink ms-3" href="#" data-subjectId="${result[i].id}"> <i class="bi bi-trash-fill" style="font-size: 20px"></i></a> </td> </tr>\n`;
                  }
             // closing table
             display+='</table>';
+            // displaying content
+            mainContent.innerHTML = display;
 
             //pagination
-            paginationResult=pagination(display,result.length);
+            paginationResult=paginationFunction(result.length);
 
             // searching
             const searchBar=document.querySelector("#search");
@@ -190,7 +196,7 @@ showClassrooms.addEventListener("click", async () =>
         try {
             
             //sending request 
-            const result = await sendGetRequest(url);
+            const result = await sendNoBodyRequest(url,"GET");
 
             // result display
             //adding header
@@ -201,13 +207,15 @@ showClassrooms.addEventListener("click", async () =>
             display+='<table id="table"  class="table table-striped table-hover w-100" >\n<tr><th>م</th><th>الاسم</th><th>الصف</th><th>المبنى</th><th>عدد الطلاب</th><th>العمليات</th></tr>';
             for (let i = 0; i < result.length; i++)
                  {
-                    display+=`<tr> <td>${i+1}</td>\n  <td>${result[i].classroomName}</td>\n <td><a class="gradeLink "href="#" data-grade="${result[i].grade}">${studentGrade.get(result[i].grade)}</a></td>\n <td><a class="buildingLink "href="#" data-buildingtId="${result[i].buildingId}">${result[i].buildingName}</a></td>\n <td>${result[i].boysNO+result[i].girlsNo}</td>\n <td><a class="classroomDetailsLink" href="#" data-classroomId="${result[i].classroomId}"> <i class="bi bi-info-circle-fill"style="font-size: 20px"></i></a> <a class="classroomEditingLink ms-3" href="#" data-classroomId="${result[i].classroomId}"><i class="bi bi-pen-fill" style="font-size: 20px"></i></a> <a class="classroomDeleteLink ms-3" href="#" data-classroomId="${result[i].classroomId}"> <i class="bi bi-trash-fill" style="font-size: 20px"></i></a> </td> </tr>\n`;
+                    display+=`<tr> <td>${i+1}</td>\n  <td>${result[i].classroomName}</td>\n <td><a class="gradeLink "href="#" data-grade="${result[i].grade}">${studentGrade.get(result[i].grade)}</a></td>\n <td><a class="buildingLink "href="#" data-buildingtId="${result[i].buildingId}">${result[i].buildingName}</a></td>\n <td>${result[i].boysNO+result[i].girlsNo}</td>\n <td><a class="detailsLink" href="#" data-classroomId="${result[i].classroomId}"> <i class="bi bi-info-circle-fill"style="font-size: 20px"></i></a> <a class="editingLink ms-3" href="#" data-classroomId="${result[i].classroomId}"><i class="bi bi-pen-fill" style="font-size: 20px"></i></a> <a class="deleteLink ms-3" href="#" data-classroomId="${result[i].classroomId}"> <i class="bi bi-trash-fill" style="font-size: 20px"></i></a> </td> </tr>\n`;
                  }
             // closing table
             display+='</table>';
+            // displaying content
+            mainContent.innerHTML = display;
 
             //pagination
-            paginationResult=pagination(display,result.length);
+            paginationResult=paginationFunction(result.length);
 
             // searching
             const searchBar=document.querySelector("#search");
@@ -237,7 +245,7 @@ showBuildings.addEventListener("click", async () =>
         try {
             
             //sending request 
-            const result = await sendGetRequest(url);
+            const result = await sendNoBodyRequest(url,"GET");
 
             // result display
             //adding header
@@ -248,13 +256,15 @@ showBuildings.addEventListener("click", async () =>
             display+='<table id="table"  class="table table-striped table-hover w-100" >\n<tr><th>م</th><th>الاسم</th><th>عدد الادوار</th><th>عدد الفصول</th><th>العمليات</th></tr>';
             for (let i = 0; i < result.length; i++)
                  {
-                    display+=`<tr> <td>${i+1}</td>\n <td>${result[i].name}</td>\n <td>${result[i].floorsNo}</td>\n <td>${result[i].classroomsNo}</td>\n <td><a class="buildingDetailsLink" href="#" data-buildingId="${result[i].id}"> <i class="bi bi-info-circle-fill" style="font-size: 20px"></i></a> <a class="buildingEditingLink ms-3" href="#" data-buildingId="${result[i].id}"><i class="bi bi-pen-fill" style="font-size: 20px"></i></a> <a class="buildingDeleteLink ms-3" href="#" data-buildingId="${result[i].id}"> <i class="bi bi-trash-fill" style="font-size: 20px"></i></a> </td> </tr>\n`;
+                    display+=`<tr> <td>${i+1}</td>\n <td>${result[i].name}</td>\n <td>${result[i].floorsNo}</td>\n <td>${result[i].classroomsNo}</td>\n <td><a class="detailsLink" href="#" data-buildingId="${result[i].id}"> <i class="bi bi-info-circle-fill" style="font-size: 20px"></i></a> <a class="editingLink ms-3" href="#" data-buildingId="${result[i].id}"><i class="bi bi-pen-fill" style="font-size: 20px"></i></a> <a class="deleteLink ms-3" href="#" data-buildingId="${result[i].id}"> <i class="bi bi-trash-fill" style="font-size: 20px"></i></a> </td> </tr>\n`;
                  }
             // closing table
             display+='</table>';
+            // displaying content
+            mainContent.innerHTML = display;
 
             //pagination
-            paginationResult=pagination(display,result.length);
+            paginationResult=paginationFunction(result.length);
 
             // searching
             const searchBar=document.querySelector("#search");
@@ -272,6 +282,7 @@ addBuilding.addEventListener("click", async () =>
            
             //sending request 
             const result = await sendpostRequest(url,data);
+            
                 
             } catch (error) {
                 console.error(error.message);
@@ -281,78 +292,100 @@ addBuilding.addEventListener("click", async () =>
 // event delegation for dynamic content
 mainContent.addEventListener("click",  (event) =>
     {
+  
+        if (event.target.closest(".detailsLink"))
+            {
+                detailsLink = event.target.closest(".detailsLink");
+
+                if(detailsLink.dataset.teacherid)
+                    {
+                        alert(detailsLink.dataset.teacherid);
+                    }
+                else if(detailsLink.dataset.studentid)
+                    {
+                        alert(detailsLink.dataset.studentid);
+                    }
+                else if(detailsLink.dataset.subjectid)
+                    {
+                        alert(detailsLink.dataset.subjectid);
+                    }
+                else if(detailsLink.dataset.classroomid)
+                    {
+                        alert(detailsLink.dataset.classroomid);
+                    }
+                else if(detailsLink.dataset.buildingid)
+                    {
+                        alert(detailsLink.dataset.buildingid);
+                    }
+    
+            }
+        if (event.target.closest(".editingLink"))
+            {
+                editingLink = event.target.closest(".editingLink");
+
+                if(editingLink.dataset.teacherid)
+                    {
+                        alert(editingLink.dataset.teacherid);
+                    }
+                else if(editingLink.dataset.studentid)
+                    {
+                        alert(editingLink.dataset.studentid);
+                    }
+                else if(editingLink.dataset.subjectid)
+                    {
+                        alert(editingLink.dataset.subjectid);
+                    }
+                else if(editingLink.dataset.classroomid)
+                    {
+                        alert(editingLink.dataset.classroomid);
+                    }
+                else if(editingLink.dataset.buildingid)
+                    {
+                        alert(editingLink.dataset.buildingid);
+                    }
+    
+            }
+        if (event.target.closest(".deleteLink"))
+            {
+                deleteLink = event.target.closest(".deleteLink");
+
+                if(deleteLink.dataset.teacherid)
+                    {
+                        alert(deleteLink.dataset.teacherid);
+                    }
+                else if(deleteLink.dataset.studentid)
+                    {
+                        alert(deleteLink.dataset.studentid);
+                    }
+                else if(deleteLink.dataset.subjectid)
+                    {
+                        alert(deleteLink.dataset.subjectid);
+                    }
+                else if(deleteLink.dataset.classroomid)
+                    {
+                        alert(deleteLink.dataset.classroomid);
+                    }
+                else if(deleteLink.dataset.buildingid)
+                    {
+                        alert(deleteLink.dataset.buildingid);
+                    }
+    
+            }
         //student links
-        if (event.target.closest(".studentDetailsLink"))
-            {
-                studentDetailsLink = event.target.closest(".studentDetailsLink");
-                alert(studentDetailsLink.dataset.studentid);
-            }
-        else if (event.target.closest(".studentEditingLink"))
-            {
-                studentEditingLink = event.target.closest(".studentEditingLink");
-                alert(studentEditingLink.dataset.studentid);
-            }
-        else if (event.target.closest(".studentDeleteLink"))
-            {
-                studentDeleteLink = event.target.closest(".studentDeleteLink");
-                alert(studentDeleteLink.dataset.studentid);          
-            }
         else if (event.target.closest(".classroomLink"))
             {  
                 classroomLink = event.target.closest(".classroomLink");
                 alert(classroomLink.dataset.classroomid);          
             }
+
         //teacher links
-        else if (event.target.closest(".teacherDetailsLink"))
-            {
-                teacherDetailsLink = event.target.closest(".teacherDetailsLink");
-                alert(teacherDetailsLink.dataset.teacherid);
-            }
-        else if (event.target.closest(".teacherEditingLink"))
-            {
-                teacherEditingLink = event.target.closest(".teacherEditingLink");
-                alert(teacherEditingLink.dataset.teacherid);
-            }
-        else if (event.target.closest(".teacherDeleteLink"))
-            {
-                teacherDeleteLink = event.target.closest(".teacherDeleteLink");
-                alert(teacherDeleteLink.dataset.teacherid);          
-            }
         else if (event.target.closest(".subjectLink"))
             {
                 subjectLink = event.target.closest(".subjectLink");
                 alert(subjectLink.dataset.subjectid);          
             }
-        //subject links
-        else if (event.target.closest(".subjectDetailsLink"))
-            {
-                subjectDetailsLink = event.target.closest(".subjectDetailsLink");
-                alert(subjectDetailsLink.dataset.subjectid);          
-            }
-        else if (event.target.closest(".subjectEditingLink"))
-            {
-                subjectEditingLink = event.target.closest(".subjectEditingLink");
-                alert(subjectEditingLink.dataset.subjectid);          
-            }
-        else if (event.target.closest(".subjectDeleteLink"))            {
-                subjectDeleteLink = event.target.closest(".subjectDeleteLink");
-                alert(subjectDeleteLink.dataset.subjectid);          
-            }
+
         //classroom links
-        else if (event.target.closest(".classroomDetailsLink"))
-            {
-                classroomDetailsLink = event.target.closest(".classroomDetailsLink");
-                alert(classroomDetailsLink.dataset.classroomid);          
-            }
-        else if (event.target.closest(".classroomEditingLink"))
-            {
-                classroomEditingLink = event.target.closest(".classroomEditingLink");
-                alert(classroomEditingLink.dataset.classroomid);          
-            }
-        else if (event.target.closest(".classroomDeleteLink"))            {
-                classroomDeleteLink = event.target.closest(".classroomDeleteLink");
-                alert(classroomDeleteLink.dataset.classroomid);          
-            }
         else if (event.target.closest(".buildingLink"))            {
                 buildingLink = event.target.closest(".buildingLink");
                 alert(buildingLink.dataset.buildingid);          
@@ -361,33 +394,19 @@ mainContent.addEventListener("click",  (event) =>
                 gradeLink = event.target.closest(".gradeLink");
                 alert(gradeLink.dataset.grade);          
             }
-        //building links
-        else if (event.target.closest(".buildingDetailsLink"))
-            {
-                buildingDetailsLink = event.target.closest(".buildingDetailsLink");
-                alert(buildingDetailsLink.dataset.buildingid);          
-            }
-        else if (event.target.closest(".buildingEditingLink"))
-            {
-                buildingEditingLink = event.target.closest(".buildingEditingLink");
-                alert(buildingEditingLink.dataset.buildingid);          
-            }
-        else if (event.target.closest(".buildingDeleteLink"))            {
-                buildingDeleteLink = event.target.closest(".buildingDeleteLink");
-                alert(buildingDeleteLink.dataset.buildingid);          
-            }
-        
-        
-        
         
     });
 
 
 //functions
 // request functions
-async function sendGetRequest(url,method,data=null)
+async function sendNoBodyRequest(url,method,data=null)
     {
-            const response = await fetch(url);
+            const response = await fetch(url,
+                {
+                    method:method
+                });
+                
             if (!response.ok) 
                 {
                     throw new Error(`Response status: ${response.status}`);
@@ -397,17 +416,18 @@ async function sendGetRequest(url,method,data=null)
             return result;
     }
 
-async function sendPostRequest(url,data)
+async function sendBodyRequest(url,method,data)
     {
              const response = await fetch(url, 
                 {
-                    method: "POST",
+                    method: method,
                     headers: 
                         {
                             "Content-Type": "application/json",
                         },
                     body: JSON.stringify(data),
                 });
+
             if (!response.ok) 
                 {
                     throw new Error(`Response status: ${response.status}`);
@@ -431,19 +451,21 @@ async function sendPostRequest(url,data)
 
 // pagination functions
 //pagination logic function
-function pagination(display,resultLength)
+function paginationFunction(resultLength)
     {
         // adding pagination elements
         const totalPages = Math.ceil(resultLength / 10); 
-         display+=`<div class="pagination" id="pagination">\n<a href="#" id="prev">السابق</a>`;
+         paginationElements=`<div class="pagination" id="pagination">\n<a href="#" id="prev">السابق</a>\n`;
         for (let i = 0; i < totalPages; i++)
             {
-                display+=`<a href="#" class="page-link" data-page="${i+1}">${i+1}</a>\n`;
+                paginationElements+=`<a href="#" class="page-link" data-page="${i+1}">${i+1}</a>\n`;
             }
-        display+=`<a href="#" id="next">التالي</a>\n</div>`;
+        paginationElements+=`<a href="#" id="next">التالي</a>\n</div>`;
+        console.log(paginationElements);
 
-        //displaying content
-        mainContent.innerHTML = display;
+        //adding pagination to main content
+        // mainContent.insertAdjacentHTML("beforeend",pagination);
+        mainContent.innerHTML += paginationElements;
         // pagination
         const paginationContainer = document.getElementById('pagination'); 
         const prevButton = document.getElementById('prev'); 
