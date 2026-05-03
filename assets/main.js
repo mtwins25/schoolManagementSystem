@@ -290,7 +290,7 @@ addBuilding.addEventListener("click", async () =>
     });
 // other event listeners
 // event delegation for dynamic content
-mainContent.addEventListener("click",  (event) =>
+mainContent.addEventListener("click",  async (event) =>
     {
   
         if (event.target.closest(".detailsLink"))
@@ -319,7 +319,7 @@ mainContent.addEventListener("click",  (event) =>
                     }
     
             }
-        if (event.target.closest(".editingLink"))
+        else if (event.target.closest(".editingLink"))
             {
                 const editingLink = event.target.closest(".editingLink");
 
@@ -345,45 +345,53 @@ mainContent.addEventListener("click",  (event) =>
                     }
     
             }
-        if (event.target.closest(".deleteLink"))
-            {
-                const deleteLink = event.target.closest(".deleteLink");
-                const row = deleteLink.parentElement.parentElement;
+        else if (event.target.closest(".deleteLink"))
+            {   
+                if(confirm("هل انت متأكد من الحذف؟"))
+                    {
+                    
+                        const deleteLink = event.target.closest(".deleteLink");
+                        const row = deleteLink.parentElement.parentElement;
 
-                if(deleteLink.dataset.teacherid)
-                    {
-                        alert(deleteLink.dataset.teacherid);
+                        if(deleteLink.dataset.teacherid)
+                            {
+                                const response=await sendNoBodyRequest(`teachers/${deleteLink.dataset.teacherid}`,"DELETE");
+                            }
+                        else if(deleteLink.dataset.studentid)
+                            {
+                                const response=await sendNoBodyRequest(`students/${deleteLink.dataset.studentid}`,"DELETE");
+                            }
+                        else if(deleteLink.dataset.subjectid)
+                            {
+                                const response=await sendNoBodyRequest(`subjects/${deleteLink.dataset.subjectid}`,"DELETE");
+                            }
+                        else if(deleteLink.dataset.classroomid)
+                            {
+                                const response=await sendNoBodyRequest(`classrooms/${deleteLink.dataset.classroomid}`,"DELETE");
+                            }
+                        else if(deleteLink.dataset.buildingid)
+                            {
+                                const response=await sendNoBodyRequest(`buildings/${deleteLink.dataset.buildingid}`,"DELETE");
+                            }
+                        row.remove();
+                        
+                        //reindexing rows after deletion
+                        const table = document.querySelector("#table");
+                        let trs = table.querySelectorAll("tr");
+                        for (let i = 1; i < trs.length; i++)
+                            {
+                                trs[i].querySelectorAll("td")[0].innerHTML = i;
+                            }
+                        
+                        // to handle pagination correctly after deletion
+                        const paginationContainer = document.querySelector('#pagination');
+                        paginationContainer.remove();
+                        paginationFunction(trs.length-1);
+                        
+                        // searching
+                        const searchBar=document.querySelector("#search");
+                        searchBar.addEventListener("keyup",()=>{search(searchBar.value)});
                     }
-                else if(deleteLink.dataset.studentid)
-                    {
-                        alert(deleteLink.dataset.studentid);
-                    }
-                else if(deleteLink.dataset.subjectid)
-                    {
-                        alert(deleteLink.dataset.subjectid);
-                    }
-                else if(deleteLink.dataset.classroomid)
-                    {
-                        alert(deleteLink.dataset.classroomid);
-                    }
-                else if(deleteLink.dataset.buildingid)
-                    {
-                        alert(deleteLink.dataset.buildingid);
-                    }
-                row.remove();
-                const paginationContainer = document.querySelector('#pagination');
-                paginationContainer.remove();
-                const table = document.querySelector("#table");
-                let trs = table.querySelectorAll("tr");
-
-                for (let i = 1; i < trs.length; i++)
-                    {
-                        trs[i].querySelectorAll("td")[0].innerHTML = i;
-                    }
-                paginationFunction(trs.length-1);
-                // searching
-                const searchBar=document.querySelector("#search");
-                searchBar.addEventListener("keyup",()=>{search(searchBar.value)});
     
             }
         //student links
