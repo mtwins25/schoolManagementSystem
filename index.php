@@ -163,16 +163,49 @@
     <div id="mainContent" class="container w-75  mt-5 " >
         
         <!-- main page content -->
-        <div class="row">
-            <div class="col">
-           
+        <div class="row g-3">
+            <div class="col-md-6">
+              <label for="name" class="form-label">الاسم</label>
+              <input type="text" class="form-control" id="name">
             </div>
-            <div class="col">
-              Column
+            <div class="col-md-6">
+              <label for="nId" class="form-label">الرقم القومي</label>
+              <input type="text" class="form-control" id="nId">
             </div>
-            <div class="col">
-              Column
+            <div class="row g-3">
+            <div class="col-md-6">
+              <label for="guardianName" class="form-label">اسم ولي الامر</label>
+              <input type="text" class="form-control" id="guardianName">
             </div>
+            <div class="col-md-6">
+              <label for="guardianphoneNo" class="form-label">رقم هاتف ولي الامر</label>
+              <input type="text" class="form-control" id="guardianphoneNo">
+            </div>
+            <div class="col-md-4">
+              <label for="DOB" class="form-label">تاريخ الميلاد</label>
+              <input type="date" class="form-control" id="DOB">
+            </div>
+            <div class="col-md-4">
+              <label for="religion" class="form-label">الدين</label>
+              <select class="form-select" id="religion">
+                <option selected>اختر</option>
+                <option value="مسلم">مسلم</option>
+                <option value="مسيحي">مسيحي</option>
+              </select>
+            </div>
+            <div class="col-md-4">
+              <label for="gender" class="form-label">الجنس</label>
+              <select class="form-select" id="gender">
+                <option selected>اختر</option>
+                <option value="1">ذكر</option>
+                <option value="2">أنثى</option>
+              </select>
+            </div>
+
+
+                <div class="col-12">
+                  <button type="submit" class="btn btn-primary">اضف</button>
+                </div>
         </div>
         <!-- end of main page content -->
     </div>
