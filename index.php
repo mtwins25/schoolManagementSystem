@@ -160,9 +160,10 @@
     </div>
     <!-- end of offcanvas  -->
     <!-- main container -->
-    <div id="mainContent" class="container w-75  mt-5 " >
+    <div id="mainContent" class="container w-75  mt-5">
         
         <!-- main page content -->
+        <!-- <h4 class="mb-4">اضافة طالب</h4>
         <div class="row g-3">
             <div class="col-md-6">
               <label for="name" class="form-label">الاسم</label>
@@ -172,7 +173,6 @@
               <label for="nId" class="form-label">الرقم القومي</label>
               <input type="text" class="form-control" id="nId">
             </div>
-            <div class="row g-3">
             <div class="col-md-6">
               <label for="guardianName" class="form-label">اسم ولي الامر</label>
               <input type="text" class="form-control" id="guardianName">
@@ -188,7 +188,7 @@
             <div class="col-md-4">
               <label for="religion" class="form-label">الدين</label>
               <select class="form-select" id="religion">
-                <option selected>اختر</option>
+                <option value="" selected>اختر</option>
                 <option value="مسلم">مسلم</option>
                 <option value="مسيحي">مسيحي</option>
               </select>
@@ -196,17 +196,57 @@
             <div class="col-md-4">
               <label for="gender" class="form-label">الجنس</label>
               <select class="form-select" id="gender">
-                <option selected>اختر</option>
+                <option value="" selected>اختر</option>
                 <option value="1">ذكر</option>
                 <option value="2">أنثى</option>
               </select>
             </div>
+            <div class="col-md-3">
+              <label for="grade" class="form-label">الصف</label>
+              <select class="form-select" id="grade">
+                <option value="" selected>اختر</option>
+                <option value="1">الاول الابتدائي</option>
+                <option value="2">الثاني الابتدائي</option>
+                <option value="3">الثالث الابتدائي</option>
+                <option value="4">الرابع الابتدائي</option>
+                <option value="5">الخامس الابتدائي</option>
+                <option value="6">السادس الابتدائي</option>
+                <option value="7">الاول الاعدادي</option>
+                <option value="8">الثاني الاعدادي</option>
+                <option value="9">الثالث الاعدادي</option>
+                <option value="10">الاول الثانوي</option>
+                <option value="11">الثاني الثانوي</option>
+                <option value="12">الثالث الثانوي</option>
+              </select>
+            </div>
+            <div class="col-md-3">
+              <label for="department" class="form-label">القسم</label>
+              <select class="form-select" id="department">
+                <option value="" selected>اختر</option>
+                <option value="1">علمي</option>
+                <option value="2">ادبي</option>
+              </select>
+            </div>
+
+            <div class="col-md-3">
+              <label for="subDepartment" class="form-label">الفرع</label>
+              <select class="form-select" id="subDepartment">
+                <option value=""selected>اختر</option>
+                <option value="1">رياضة</option>
+                <option value="2">علوم</option>
+              </select>
+            </div>
+            <div class="col-md-3">
+              <label for="classRoom" class="form-label">الفصل</label>
+              <select class="form-select" id="classRoom">
+                <option value="" selected>اختر</option>
+              </select>
+            </div>
 
 
-                <div class="col-12">
-                  <button type="submit" class="btn btn-primary">اضف</button>
-                </div>
-        </div>
+            <div class="col-12">
+              <button id="studentAddButton" class="btn submitButton" style>اضف</button>
+            </div> -->
         <!-- end of main page content -->
     </div>
     <!-- end of main container -->

@@ -18,9 +18,18 @@ a.deleteLink:hover
         text-decoration: none;
     }
 
-h5
+h5,h4
     {
         color: #14436F;
+    }
+label
+    {
+        color: #14436F;
+    }
+label:hover
+    {
+        color: #B99557;
+        cursor: pointer;
     }
 ul
     {
@@ -49,6 +58,21 @@ td
     /* margin-right: 35%; */
     margin-bottom: 2rem;
 }
+.addButton
+    {
+        background-color: #14436F;
+        color: white;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 4px;
+        width: 100%;
+    }
+.addButton:hover
+    {
+        background-color: #B99557;
+        color: white;
+    }
+
 
 .pagination a {
     color: #14436F;
@@ -71,6 +95,11 @@ td
 
 /* bootstrap modifications */
 .form-control:focus
+    {
+        border-color: #B99557;
+        box-shadow: 0 0 0 0.1rem rgba(185, 149, 87, 0.25);
+    }
+.form-select:focus
     {
         border-color: #B99557;
         box-shadow: 0 0 0 0.1rem rgba(185, 149, 87, 0.25);
